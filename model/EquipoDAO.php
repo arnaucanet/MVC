@@ -16,4 +16,22 @@ class EquipoDAO{
         $con->close();
         return $equipo;
     }
+
+    public static function getEquipos(){
+        $con = DataBase::connect();
+        //preparacion consulta
+        $stmt = $con->prepare("SELECT * FROM equipos");
+        $stmt->execute();
+        $results = $stmt->get_result();
+
+        $listaEquipos = [];
+
+        while($equipo = $results->fetch_object('Equipo')){
+            $listaEquipos[]=$equipo;
+        }
+
+        
+        $con->close();
+        return $listaEquipos;
+    }
 }

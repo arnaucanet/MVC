@@ -1,9 +1,7 @@
 <?php
-include_once 'model/EquipoDAO.php';
+include_once 'controller/EquipoController.php';
 
-
-$equipo = EquipoDAO::getEquipoByID(1);
-
-var_dump($equipo);
+$equiporController = new EquipoController();
+$equiporController->index();
 
 ?>

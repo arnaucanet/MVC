@@ -12,6 +12,7 @@
                 <td><?=$equipo->getNombre();?></td>
                 <td><?=$equipo->getPais();?></td>
                 <td><?=$equipo->getCiudad();?></td>
+                <td><a href="?controller=Equipo&action=show&idequipo=<?=$equipo->getId();?>">Link</td>
             </tr>
         <?php } ?>
 </table>

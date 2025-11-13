@@ -1,6 +1,7 @@
 <?php
 
-require_once 'DataBase.php';
+include_once 'database/database.php';
+include_once 'model/DetallePedido.php';
 
 class DetallePedidoDAO {
     private $db;

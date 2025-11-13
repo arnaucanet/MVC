@@ -1,8 +1,9 @@
 <?php
 
-require_once 'DataBase.php';
+include_once 'database/database.php';
+include_once 'model/Usuario.php';
 
-class OfertaDAO {
+class UsuarioDAO {
     private $db;
 
     public function __construct() {

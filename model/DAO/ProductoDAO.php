@@ -1,6 +1,6 @@
 <?php
-
-require_once 'DataBase.php';
+include_once 'database/database.php';
+include_once 'model/Producto.php';
 
 class ProductoDAO {
     private $db;
@@ -13,5 +13,5 @@ class ProductoDAO {
         $result = $this->db->query("SELECT * FROM producto");
         return $result->fetch_all(MYSQLI_ASSOC);
     }
-
 }
+?>

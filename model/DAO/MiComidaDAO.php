@@ -45,4 +45,3 @@ class MiComidaDAO {
         $stmt->execute();
     }
 }
-?>

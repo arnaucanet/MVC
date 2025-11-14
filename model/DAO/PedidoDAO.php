@@ -14,5 +14,4 @@ class PedidoDAO {
         $result = $this->db->query("SELECT * FROM pedido");
         return $result->fetch_all(MYSQLI_ASSOC);
     }
-
 }

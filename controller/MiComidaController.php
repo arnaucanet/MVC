@@ -34,4 +34,3 @@ class MiComidaController {
         header('Location: index.php?controller=MiComida&action=index');
     }
 }
-?>

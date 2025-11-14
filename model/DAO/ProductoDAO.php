@@ -14,4 +14,3 @@ class ProductoDAO {
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 }
-?>

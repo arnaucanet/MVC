@@ -14,5 +14,4 @@ class LogDAO {
         $result = $this->db->query("SELECT * FROM log");
         return $result->fetch_all(MYSQLI_ASSOC);
     }
-
 }

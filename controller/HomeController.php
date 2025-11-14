@@ -15,4 +15,3 @@ class HomeController {
         include 'view/home/index.php';
     }
 }
-?>

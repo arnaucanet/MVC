@@ -14,5 +14,4 @@ class CategoriaDAO {
         $result = $this->db->query("SELECT * FROM categoria");
         return $result->fetch_all(MYSQLI_ASSOC);
     }
-
 }

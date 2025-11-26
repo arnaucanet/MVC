@@ -15,14 +15,4 @@ class ProductoController {
         $productos = $this->productoDAO->getProductos();
         include 'view/producto/index.php';
     }
-
-    // Ejemplo de método para agregar al carrito
-    public function agregarCarrito() {
-        $id_producto = $_GET['id'] ?? null;
-        if($id_producto) {
-            // Aquí deberías implementar lógica real de carrito
-            // Por ejemplo: $_SESSION['carrito'][] = $id_producto;
-            header('Location: index.php?controller=Producto&action=index');
-        }
-    }
 }

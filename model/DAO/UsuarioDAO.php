@@ -10,4 +10,59 @@ class UsuarioDAO {
         $this->db = DataBase::connect();
     }
 
+    public function getByEmail($email){
+        $stmt = $this->db->prepare("SELECT * FROM usuario WHERE email = ? LIMIT 1");
+        if(!$stmt) return null;
+        $stmt->bind_param('s', $email);
+        $stmt->execute();
+        $res = $stmt->get_result();
+        $row = $res->fetch_assoc();
+        if(!$row) return null;
+        $u = new Usuario();
+        if(isset($row['id_usuario'])) $u->setId_usuario($row['id_usuario']);
+        if(isset($row['nombre'])) $u->setNombre($row['nombre']);
+        if(isset($row['email'])) $u->setEmail($row['email']);
+        if(isset($row['password'])) $u->setPassword($row['password']);
+        if(isset($row['direccion'])) $u->setDireccion($row['direccion']);
+        if(isset($row['telefono'])) $u->setTelefono($row['telefono']);
+        if(isset($row['rol'])) $u->setRol($row['rol']);
+        if(isset($row['fecha_registro'])) $u->setFecha_registro($row['fecha_registro']);
+        return $u;
+    }
+
+    public function getById($id){
+        $id = (int)$id;
+        $stmt = $this->db->prepare("SELECT * FROM usuario WHERE id_usuario = ? LIMIT 1");
+        if(!$stmt) return null;
+        $stmt->bind_param('i', $id);
+        $stmt->execute();
+        $res = $stmt->get_result();
+        $row = $res->fetch_assoc();
+        if(!$row) return null;
+        $u = new Usuario();
+        if(isset($row['id_usuario'])) $u->setId_usuario($row['id_usuario']);
+        if(isset($row['nombre'])) $u->setNombre($row['nombre']);
+        if(isset($row['email'])) $u->setEmail($row['email']);
+        if(isset($row['password'])) $u->setPassword($row['password']);
+        if(isset($row['direccion'])) $u->setDireccion($row['direccion']);
+        if(isset($row['telefono'])) $u->setTelefono($row['telefono']);
+        if(isset($row['rol'])) $u->setRol($row['rol']);
+        if(isset($row['fecha_registro'])) $u->setFecha_registro($row['fecha_registro']);
+        return $u;
+    }
+
+    public function create(Usuario $u){
+        $stmt = $this->db->prepare("INSERT INTO usuario (nombre, email, password, direccion, telefono, rol, fecha_registro) VALUES (?, ?, ?, ?, ?, ?, NOW())");
+        if(!$stmt) return false;
+        $nombre = $u->getNombre();
+        $email = $u->getEmail();
+        $password = $u->getPassword();
+        $direccion = $u->getDireccion();
+        $telefono = $u->getTelefono();
+        $rol = $u->getRol() ?: 'user';
+        $stmt->bind_param('ssssss', $nombre, $email, $password, $direccion, $telefono, $rol);
+        $ok = $stmt->execute();
+        if($ok) return $this->db->insert_id;
+        return false;
+    }
 }

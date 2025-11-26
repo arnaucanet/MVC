@@ -1,9 +1,10 @@
 <?php include 'view/parcials/header.php'; ?>
+<div class="container" style="padding-top:90px;">
 
 <h1 class="text-danger mb-4">Mi Comida Favorita</h1>
 
 <?php if (empty($mis_productos)): ?>
-    <p>No tienes productos guardados todavía 🍽️</p>
+    <p>No tienes productos guardados todavia</p>
 <?php else: ?>
     <div class="row">
         <?php foreach ($mis_productos as $producto): ?>
@@ -22,4 +23,5 @@
     </div>
 <?php endif; ?>
 
+</div>
 <?php include 'view/parcials/footer.php'; ?>

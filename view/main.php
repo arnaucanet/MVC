@@ -8,4 +8,4 @@
 <body>
     <?php include_once $view; ?>
 </body>
-</html>
+</html> 

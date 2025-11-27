@@ -59,7 +59,7 @@ class UsuarioDAO {
         $password = $u->getPassword();
         $direccion = $u->getDireccion();
         $telefono = $u->getTelefono();
-        $rol = $u->getRol() ?: 'user';
+        $rol = $u->getRol() ?: 'cliente';
         $stmt->bind_param('ssssss', $nombre, $email, $password, $direccion, $telefono, $rol);
         $ok = $stmt->execute();
         if($ok) return $this->db->insert_id;

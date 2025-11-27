@@ -38,6 +38,11 @@ class UsuarioController {
         if(session_status() !== PHP_SESSION_ACTIVE) session_start();
         $_SESSION['user_id'] = $uid;
 
+        if($user->getRol() === 'administrador'){
+            header('Location: index.php?controller=Admin');
+            return;
+        }
+
         header('Location: index.php');
     }
 

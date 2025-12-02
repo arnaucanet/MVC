@@ -12,7 +12,30 @@ class ProductoController {
     }
 
     public function index() {
-        $productos = $this->productoDAO->getProductos();
+        $query = $_GET['q'] ?? '';
+        $categoriaId = $_GET['categoria'] ?? null;
+
+        if (!empty($query) || !empty($categoriaId)) {
+            $productos = $this->productoDAO->searchProductos($query, $categoriaId);
+        } else {
+            $productos = $this->productoDAO->getProductos();
+        }
+        
+        // categorias filtro
+        require_once 'model/DAO/CategoriaDAO.php';
+        $categoriaDAO = new CategoriaDAO();
+        $categorias = $categoriaDAO->getCategorias();
+
         include 'view/producto/index.php';
+    }
+
+    public function detalle() {
+        if (isset($_GET['id'])) {
+            $id = $_GET['id'];
+            $producto = $this->productoDAO->getProductoById($id);
+            include 'view/producto/detalle.php';
+        } else {
+            header("Location: index.php");
+        }
     }
 }

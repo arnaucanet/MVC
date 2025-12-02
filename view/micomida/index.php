@@ -10,12 +10,14 @@
         <?php foreach ($mis_productos as $producto): ?>
             <div class="col-md-3 mb-4">
                 <div class="card bg-dark text-white">
-                    <img src="<?= $producto['imagen'] ?>" class="card-img-top" alt="<?= $producto['nombre'] ?>">
+                    <a href="index.php?controller=Producto&action=detalle&id=<?= $producto['id_producto'] ?>">
+                        <img src="<?= $producto['imagen'] ?>" class="card-img-top" alt="<?= $producto['nombre'] ?>">
+                    </a>
                     <div class="card-body">
                         <h5 class="card-title"><?= $producto['nombre'] ?></h5>
                         <p><?= $producto['descripcion'] ?></p>
                         <p><strong><?= $producto['precio'] ?> €</strong></p>
-                        <a href="index.php?controller=MiComida&action=eliminar&id=<?= $producto['id'] ?>" class="btn btn-outline-danger">Eliminar</a>
+                        <a href="index.php?controller=MiComida&action=eliminar&id=<?= $producto['id_producto'] ?>" class="btn btn-outline-danger">Eliminar</a>
                     </div>
                 </div>
             </div>

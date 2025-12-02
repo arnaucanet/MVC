@@ -8,9 +8,6 @@ class APIUsuarioController {
         $method = $_SERVER['REQUEST_METHOD'];
         $dao = new UsuarioDAO();
 
-        // Set headers if not already set by index.php
-        header('Content-Type: application/json');
-
         if($method === 'GET'){
             if(isset($_GET['id'])){
                 $user = $dao->getById($_GET['id']);
@@ -23,8 +20,8 @@ class APIUsuarioController {
             } else {
                 $users = $dao->getAll();
                 $data = [];
-                foreach($users as $u){
-                    $data[] = $this->userToArray($u);
+                foreach($users as $user){
+                    $data[] = $this->userToArray($user);
                 }
                 echo json_encode($data);
             }
@@ -45,15 +42,15 @@ class APIUsuarioController {
                 return;
             }
 
-            $u = new Usuario();
-            $u->setNombre($data['nombre']);
-            $u->setEmail($data['email']);
-            $u->setPassword(password_hash($data['password'], PASSWORD_DEFAULT));
-            $u->setDireccion($data['direccion'] ?? '');
-            $u->setTelefono($data['telefono'] ?? '');
-            $u->setRol($data['rol'] ?? 'cliente');
+            $user = new Usuario();
+            $user->setNombre($data['nombre']);
+            $user->setEmail($data['email']);
+            $user->setPassword(password_hash($data['password'], PASSWORD_DEFAULT));
+            $user->setDireccion($data['direccion'] ?? '');
+            $user->setTelefono($data['telefono'] ?? '');
+            $user->setRol($data['rol'] ?? 'cliente');
             
-            $id = $dao->create($u);
+            $id = $dao->create($user);
             if($id){
                 http_response_code(201);
                 echo json_encode(['id' => $id, 'message' => 'User created']);
@@ -72,24 +69,24 @@ class APIUsuarioController {
                 return;
             }
 
-            $u = $dao->getById($data['id_usuario']);
-            if(!$u){
+            $user = $dao->getById($data['id_usuario']);
+            if(!$user){
                 http_response_code(404);
                 echo json_encode(['error' => 'User not found']);
                 return;
             }
 
-            if(isset($data['nombre'])) $u->setNombre($data['nombre']);
-            if(isset($data['email'])) $u->setEmail($data['email']);
-            if(isset($data['direccion'])) $u->setDireccion($data['direccion']);
-            if(isset($data['telefono'])) $u->setTelefono($data['telefono']);
-            if(isset($data['rol'])) $u->setRol($data['rol']);
+            if(isset($data['nombre'])) $user->setNombre($data['nombre']);
+            if(isset($data['email'])) $user->setEmail($data['email']);
+            if(isset($data['direccion'])) $user->setDireccion($data['direccion']);
+            if(isset($data['telefono'])) $user->setTelefono($data['telefono']);
+            if(isset($data['rol'])) $user->setRol($data['rol']);
             
             if(isset($data['password']) && !empty($data['password'])){
-                $u->setPassword(password_hash($data['password'], PASSWORD_DEFAULT));
+                $user->setPassword(password_hash($data['password'], PASSWORD_DEFAULT));
             }
             
-            if($dao->update($u)){
+            if($dao->update($user)){
                 echo json_encode(['message' => 'User updated']);
             } else {
                 http_response_code(500);
@@ -116,15 +113,15 @@ class APIUsuarioController {
         }
     }
 
-    private function userToArray($u){
+    private function userToArray($user){
         return [
-            'id_usuario' => $u->getId_usuario(),
-            'nombre' => $u->getNombre(),
-            'email' => $u->getEmail(),
-            'direccion' => $u->getDireccion(),
-            'telefono' => $u->getTelefono(),
-            'rol' => $u->getRol(),
-            'fecha_registro' => $u->getFecha_registro()
+            'id_usuario' => $user->getId_usuario(),
+            'nombre' => $user->getNombre(),
+            'email' => $user->getEmail(),
+            'direccion' => $user->getDireccion(),
+            'telefono' => $user->getTelefono(),
+            'rol' => $user->getRol(),
+            'fecha_registro' => $user->getFecha_registro()
         ];
     }
 }

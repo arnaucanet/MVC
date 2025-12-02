@@ -78,7 +78,7 @@ class UsuarioController {
         $user->setPassword(password_hash($password, PASSWORD_DEFAULT));
         $user->setDireccion($direccion);
         $user->setTelefono($telefono);
-        $user->setRol('user');
+        $user->setRol('cliente');
 
         $newId = $dao->create($user);
         if(!$newId){

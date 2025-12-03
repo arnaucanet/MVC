@@ -12,7 +12,6 @@
         <div class="auth-grid">
             <div class="auth-visual">
                 <div style="text-align:center">
-                    <h2>🍽️</h2>
                     <p class="auth-small">Únete a la mejor experiencia gastronómica</p>
                 </div>
             </div>

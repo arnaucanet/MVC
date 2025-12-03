@@ -72,7 +72,7 @@ class ProductoDAO
         $stmt->bind_param("i", $id);
         $stmt->execute();
         $results = $stmt->get_result();
-        return $results;
+        return $results->fetch_assoc();
     }
 
     public function getProductoByName($name)

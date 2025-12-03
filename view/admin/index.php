@@ -57,10 +57,35 @@
             </div>
         </div>
 
-        <!-- secciones -->
+       <!-- products -->
         <div id="products-section" class="section">
-            <div class="header-bar"><h1>Productos</h1></div>
-            <div class="card"><p>...</p></div>
+            <div class="header-bar">
+                <h1>Gestión de Productos</h1>
+                <button class="btn btn-primary" onclick="openProductModal()">+ Nuevo Producto</button>
+            </div>
+            
+            <div class="card">
+                <div class="table-container">
+                    <table id="products-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nombre</th>
+                                <th>Descripcion</th>
+                                <th>Precio</th>
+                                <th>Imagen</th>
+                                <th>Stock</th>
+                                <th>Activo</th>
+                                <th>ID Categoría</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- carga de datos con js -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
         <div id="orders-section" class="section">
             <div class="header-bar"><h1>Pedidos</h1></div>
@@ -111,7 +136,62 @@
         </div>
     </div>
 
+    <!-- crear producto -->
+    <div id="product-modal" class="modal">
+        <div class="modal-content">
+            <h3 id="modal-title-product" style="margin-top:0; margin-bottom: 20px; font-size: 20px;">Producto</h3>
+            <form id="product-form">
+                <input type="hidden" id="product-id">
+                
+                <div class="form-group">
+                    <label>Nombre</label>
+                    <input type="text" id="product-nombre" required>
+                </div>
+                
+                <div class="form-group">
+                    <label>Descripción</label>
+                    <textarea id="product-descripcion" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>Precio</label>
+                    <input type="number" step="0.01" id="product-precio" required>
+                </div>
+
+                <div class="form-group">
+                    <label>URL Imagen</label>
+                    <input type="text" id="product-imagen" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Stock</label>
+                    <input type="number" id="product-stock" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Activo</label>
+                    <select id="product-activo">
+                        <option value="1">Sí</option>
+                        <option value="0">No</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Categoría</label>
+                    <select id="product-categoriaId" required>
+                    </select>
+                </div>
+
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-cancel" onclick="closeProductModal()">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <script src="public/js/admin_users.js"></script>
+    <script src="public/js/admin_products.js"></script>
     <script>
         //poder cambiar de seccion
         function showSection(id) {

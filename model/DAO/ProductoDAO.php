@@ -14,7 +14,10 @@ class ProductoDAO
     public function getProductos()
     {
         $result = $this->db->query("SELECT * FROM producto");
-        return $result->fetch_all(MYSQLI_ASSOC);
+        if ($result) {
+            return $result->fetch_all(MYSQLI_ASSOC);
+        }
+        return [];
     }
 
     public function getProductoDestacado()
@@ -72,6 +75,15 @@ class ProductoDAO
         return $results;
     }
 
+    public function getProductoByName($name)
+    {
+        $stmt = $this->db->prepare("SELECT * FROM producto WHERE nombre LIKE '%?%'");
+        $stmt->bind_param("i", $name);
+        $stmt->execute();
+        $results = $stmt->get_result();
+        return $results;
+    }
+
     public function searchProductos($query, $categoriaId = null)
     {
         // sin filtro
@@ -102,5 +114,47 @@ class ProductoDAO
 
         $stmt->execute();
         return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function create(Producto $p){
+        $stmt = $this->db->prepare("INSERT INTO producto (nombre, descripcion, precio, imagen, stock, activo, id_categoria) VALUES (?, ?, ?, ?, ?, ?, ?)");
+        if(!$stmt) return false;
+        $nombre = $p->getNombre();
+        $descripcion = $p->getDescripcion();
+        $precio = $p->getPrecio();
+        $imagen = $p->getImagen();
+        $stock = $p->getStock();
+        $activo = $p->getActivo() ?: 0;
+        $categoriaId = $p->getId_categoria();
+        // s: string, d: double, i: integer
+        // nombre(s), descripcion(s), precio(d), imagen(s), stock(i), activo(i), categoriaId(i)
+        $stmt->bind_param('ssdsiii', $nombre, $descripcion, $precio, $imagen, $stock, $activo, $categoriaId);
+        $ok = $stmt->execute();
+        if($ok) return $this->db->insert_id;
+        return false;
+    }
+
+    public function update(Producto $p){
+        $stmt = $this->db->prepare("UPDATE producto SET nombre=?, descripcion=?, precio=?, imagen=?, stock=?, activo=?, id_categoria=? WHERE id_producto=?");
+        if(!$stmt) return false;
+        $nombre = $p->getNombre();
+        $descripcion = $p->getDescripcion();
+        $precio = $p->getPrecio();
+        $imagen = $p->getImagen();
+        $stock = $p->getStock();
+        $activo = $p->getActivo() ?: 0;
+        $categoriaId = $p->getId_categoria();
+        $productoId = $p->getId_producto();
+        
+        // nombre(s), descripcion(s), precio(d), imagen(s), stock(i), activo(i), categoriaId(i), productoId(i)
+        $stmt->bind_param('ssdsiiii', $nombre, $descripcion, $precio, $imagen, $stock, $activo, $categoriaId, $productoId);
+        return $stmt->execute();
+    }
+
+    public function delete($id){
+        $stmt = $this->db->prepare("DELETE FROM producto WHERE id_producto = ?");
+        if(!$stmt) return false;
+        $stmt->bind_param('i', $id);
+        return $stmt->execute();
     }
 }

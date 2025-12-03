@@ -65,12 +65,12 @@ $currentController = isset($_GET['controller']) ? strtolower($_GET['controller']
                     <?= $profileLabel ?>
                   </a>
                   <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark" aria-labelledby="profileMenu">
-                    <li><span class="dropdown-item-text text-muted" style="font-size:0.8rem">Hola, <?= $profileLabel ?></span></li>
+                    <li><span class="dropdown-item-text text-white" style="font-size:0.8rem">Hola, <?= $profileLabel ?></span></li>
                     <li>
                       <hr class="dropdown-divider">
                     </li>
                     <li><a class="dropdown-item" href="index.php?controller=Usuario&action=perfil">Cuenta</a></li>
-                    <li><a class="dropdown-item" href="#">Centro de ayuda</a></li>
+                    <li><a class="dropdown-item" href="index.php?controller=Info&action=help">Centro de ayuda</a></li>
                     <li>
                       <hr class="dropdown-divider">
                     </li>

@@ -1,5 +1,5 @@
 <?php include 'view/parcials/header.php'; ?>
-<div class="container" style="padding-top:55px;">
+<div class="container" style="padding-top:90px;">
 
 <?php if(session_status() !== PHP_SESSION_ACTIVE) session_start(); ?>
 <?php if(!empty($_SESSION['error'])): ?>

@@ -1,3 +1,4 @@
+</main>
 <footer class="netflixeats-footer mt-5 mb-3">
     <style>
         .netflixeats-footer {

@@ -11,7 +11,7 @@ $currentController = isset($_GET['controller']) ? strtolower($_GET['controller']
   <link href="/MVC/public/css/netflixeats.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
-<body>
+<body class="d-flex flex-column min-vh-100">
 
     <header class="site-header navbar navbar-expand-lg fixed-top">
       <div class="container-fluid">
@@ -85,3 +85,4 @@ $currentController = isset($_GET['controller']) ? strtolower($_GET['controller']
         </div>
       </div>
     </header>
+    <main class="flex-grow-1">

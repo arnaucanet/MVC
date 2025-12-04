@@ -7,16 +7,15 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('user-form').addEventListener('submit', handleFormSubmit);
 });
 
-async function fetchUsers() {
-    try {
-        const response = await fetch(API_USER_URL);
-        const users = await response.json();
-        currentUsers = users;
-        renderTable(users);
-    } catch (error) {
-        console.error('Error fetching users:', error);
-        alert('Error al cargar usuarios');
-    }
+function fetchUsers() {
+    fetch(API_USER_URL)
+        .then(response => response.json())
+        .then(users => {currentUsers = users; 
+            renderTable(users);})
+        .catch(error => {
+            console.error('Error fetching users:', error);
+            alert('Error al cargar usuarios');
+        });
 }
 
 function renderTable(users) {

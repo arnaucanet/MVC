@@ -1,4 +1,4 @@
-const API_URL = 'index.php?controller=api/APIUsuario';
+const API_USER_URL = 'index.php?controller=api/APIUsuario';
 let currentUsers = [];
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 async function fetchUsers() {
     try {
-        const response = await fetch(API_URL);
+        const response = await fetch(API_USER_URL);
         const users = await response.json();
         currentUsers = users;
         renderTable(users);
@@ -116,7 +116,7 @@ async function handleFormSubmit(e) {
     }
 
     try {
-        const response = await fetch(API_URL, {
+        const response = await fetch(API_USER_URL, {
             method: method,
             headers: {
                 'Content-Type': 'application/json'
@@ -141,7 +141,7 @@ async function deleteUser(id) {
     if (!confirm('¿Estás seguro de eliminar este usuario?')) return;
 
     try {
-        const response = await fetch(`${API_URL}&id=${id}`, {
+        const response = await fetch(`${API_USER_URL}&id=${id}`, {
             method: 'DELETE'
         });
 

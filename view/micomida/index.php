@@ -3,7 +3,11 @@
 
 <h1 class="text-danger mb-4">Mi Comida Favorita</h1>
 
-<?php if (empty($mis_productos)): ?>
+<?php if (!isset($is_logged_in) || !$is_logged_in): ?>
+    <div class="bg-dark alert alert-dark text-white" role="alert">
+        Debes <a href="index.php?controller=Usuario&action=login" class="alert-link text-danger">iniciar sesión</a> para ver tu lista de comida favorita.
+    </div>
+<?php elseif (empty($mis_productos)): ?>
     <p>No tienes productos guardados todavia</p>
 <?php else: ?>
     <div class="row">

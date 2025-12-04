@@ -298,7 +298,7 @@ footer{color:var(--muted); padding:36px 18px; text-align:center}
 
 /* ====== AUTH (LOGIN / REGISTER) ====== */
 .auth-wrap{display:flex; align-items:center; justify-content:center; padding:40px 0}
-.auth-card{width:100%; max-width:720px; border-radius:12px; overflow:hidden; box-shadow:0 10px 30px rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.04); background:linear-gradient(180deg, rgba(10,10,10,0.95), rgba(20,20,20,0.95));}
+.auth-card{width:100%; max-width:960px; border-radius:12px; overflow:hidden; box-shadow:0 10px 30px rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.04); background:linear-gradient(180deg, rgba(10,10,10,0.95), rgba(20,20,20,0.95));}
 .auth-grid{display:grid; grid-template-columns:1fr 1fr}
 .auth-visual{background:linear-gradient(135deg, rgba(229,9,20,0.15), rgba(255,255,255,0.02)); padding:36px; display:flex; align-items:center; justify-content:center;}
 .auth-visual h2{color:var(--accent); font-size:2rem; margin:0}

@@ -1,5 +1,5 @@
 <?php include 'view/parcials/header.php'; ?>
-<div class="container" style="padding-top:90px;">
+<div class="container" style="padding-top:55px;">
 
 <?php if(session_status() !== PHP_SESSION_ACTIVE) session_start(); ?>
 <?php if(!empty($_SESSION['error'])): ?>
@@ -7,7 +7,7 @@
     <?php unset($_SESSION['error']); ?>
 <?php endif; ?>
 
-<div class="auth-wrap">
+<div class="auth-wrap" style="">
     <div class="auth-card">
         <div class="auth-grid">
             <div class="auth-visual">
@@ -19,15 +19,13 @@
                 <h3 class="auth-title">Crear cuenta</h3>
                 <p class="auth-sub">Regístrate para pedir y guardar tus platos favoritos</p>
                 <form action="index.php?controller=Usuario&action=registerPost" method="post">
-                    <div class="row">
-                        <div class="col-md-6 mb-3">
-                            <label class="form-label">Nombre</label>
-                            <input type="text" name="nombre" class="form-control" required />
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <label class="form-label">Email</label>
-                            <input type="email" name="email" class="form-control" required />
-                        </div>
+                    <div class="mb-3">
+                        <label class="form-label">Nombre</label>
+                        <input type="text" name="nombre" class="form-control" required />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Email</label>
+                        <input type="email" name="email" class="form-control" required />
                     </div>
                     <div class="row">
                         <div class="col-md-6 mb-3">

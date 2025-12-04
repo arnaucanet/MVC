@@ -1,5 +1,5 @@
 <?php include 'view/parcials/header.php'; ?>
-<div class="container" style="padding-top:90px;">
+<div class="container" style="padding-top:55px;">
 
 <?php if(session_status() !== PHP_SESSION_ACTIVE) session_start(); ?>
 <?php if(!empty($_SESSION['error'])): ?>
@@ -42,8 +42,6 @@
         </div>
         <div class="auth-footer">¿Aún no tienes cuenta? <a href="index.php?controller=Usuario&action=register">Regístrate</a></div>
     </div>
-</div>
-
 </div>
 
 <?php include 'view/parcials/footer.php'; ?>

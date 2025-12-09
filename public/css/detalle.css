@@ -73,7 +73,7 @@
 
 .btn-netflix-white {
     background-color: white;
-    color: black;
+    color: rgb(255, 255, 255);
     border: none;
     font-weight: bold;
 }

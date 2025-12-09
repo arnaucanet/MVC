@@ -7,10 +7,10 @@
         <p><?= $producto_destacado['descripcion'] ?></p>
 
         <div class="cta">
-            <a href="index.php?controller=Pedido&action=crear&id=<?= $producto_destacado['id_producto'] ?>" 
-               class="btn-netflix-white">Pedir ahora</a>
+            <a href="index.php?controller=Pedido&action=add&id=<?= $producto_destacado['id_producto'] ?>" 
+               class="btn-netflix-white text-decoration-none">Pedir ahora</a>
             <a href="index.php?controller=Producto&action=detalle&id=<?= $producto_destacado['id_producto'] ?>" 
-               class="btn-netflix-transparent">Mas informacion</a>
+               class="btn-netflix-transparent text-decoration-none">Mas informacion</a>
         </div>
     </div>
 </div>
@@ -23,7 +23,7 @@
 <div class="carousel-category">Tendencias ahora</div>
 <div class="row-carousel">
     <button class="carousel-btn left" data-target="tray-recomendados">
-        <svg viewBox="0 0 24 24"><path fill="currentColor" d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
+        <img src="/MVC/public/icons/chevron-left-white.svg" alt="icon" width="24" height="24" class="me-2">
     </button>
     <div class="tray" id="tray-recomendados">
         <?php foreach ($productos_recomendados as $prod): ?>
@@ -39,7 +39,7 @@
         <?php endforeach; ?>
     </div>
     <button class="carousel-btn right" data-target="tray-recomendados">
-        <svg viewBox="0 0 24 24"><path fill="currentColor" d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+        <img src="/MVC/public/icons/chevron-right-white.svg" alt="icon" width="24" height="24" class="me-2">
     </button>
 </div>
 <?php endif; ?>
@@ -85,7 +85,7 @@
 <div class="carousel-category mt-5">Comidas extranjeras</div>
 <div class="row-carousel">
     <button class="carousel-btn left" data-target="tray-extranjeros">
-        <svg viewBox="0 0 24 24"><path fill="currentColor" d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
+        <img src="/MVC/public/icons/chevron-left-white.svg" alt="icon" width="24" height="24" class="me-2">
     </button>
     <div class="tray" id="tray-extranjeros">
         <?php foreach ($productos_extranjeros as $prod): ?>
@@ -101,7 +101,7 @@
         <?php endforeach; ?>
     </div>
     <button class="carousel-btn right" data-target="tray-extranjeros">
-        <svg viewBox="0 0 24 24"><path fill="currentColor" d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+        <img src="/MVC/public/icons/chevron-right-white.svg" alt="icon" width="24" height="24" class="me-2">
     </button>
 </div>
 <?php endif; ?>

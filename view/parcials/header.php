@@ -60,7 +60,7 @@ $currentController = isset($_GET['controller']) ? strtolower($_GET['controller']
               ?>
 
               <?php if ($profileMenu): ?>
-                <div class="dropdown">
+                <div class="dropdown flex">
                   <a class="nav-link dropdown-toggle text-white d-flex align-items-center gap-2" href="#" role="button" id="profileMenu" data-bs-toggle="dropdown" aria-expanded="false">
                     <?= $profileLabel ?>
                   </a>
@@ -77,6 +77,7 @@ $currentController = isset($_GET['controller']) ? strtolower($_GET['controller']
                     <li><a class="dropdown-item" href="index.php?controller=Usuario&action=logout">Cerrar sesión en NetflixEats</a></li>
                   </ul>
                 </div>
+                <div class="flex">Carrito</div>
               <?php else: ?>
                 <a class="btn btn-danger btn-sm" href="index.php?controller=Usuario&action=login">Iniciar sesión</a>
               <?php endif; ?>

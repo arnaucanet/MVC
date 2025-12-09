@@ -10,10 +10,7 @@
             <div class="col-md-4">
                 <div class="input-group">
                     <span class="input-group-text bg-dark border-secondary text-white">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <circle cx="11" cy="11" r="8"></circle>
-                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                        </svg>
+                        <img src="/MVC/public/icons/search.svg" alt="icon" width="24" height="24" class="me-2">
                     </span>
                     <input type="text" name="q" class="form-control bg-dark border-secondary text-white" 
                            placeholder="Buscar productos..." value="<?= htmlspecialchars($query ?? '') ?>">
@@ -44,40 +41,25 @@
     </div>
 
 <?php
-// Helper functions for category grouping (kept for compatibility if needed, though we are now filtering in DB)
 function getCategoryId($p){
     if(is_array($p) && isset($p['id_categoria'])) return (int)$p['id_categoria'];
     return 0;
 }
 
-// Group products by category for display
 $groups = [];
 $foreignCats = [5,6,7,9,10,11,13];
-
-// If we are filtering, we might just want to show a flat list or still grouped. 
-// Let's stick to the grouped view unless it's a specific search which usually implies a flat list result.
-// But the user asked for filters.
-
-// If there is a search query or category filter, we display results directly.
-// If not, we display the categorized view as before.
 
 $isFiltered = !empty($query) || !empty($categoriaId);
 
 if ($isFiltered) {
-    // Flat list for search results
     $groups['Resultados'] = ['name' => 'Resultados de búsqueda', 'items' => $productos];
 } else {
-    // Group by category logic
     include_once 'model/DAO/CategoriaDAO.php';
     $categoriaDao = new CategoriaDAO();
     $categoryNameCache = [];
 
     foreach($productos as $prod){
-        // Assuming $prod is array from DAO
         $catId = $prod['id_categoria'];
-        
-        // Skip specific categories if needed or handle foreign food logic
-        if($catId === 12) continue; 
 
         if(in_array($catId, $foreignCats, true)){
             $groupKey = 'extranjeras';
@@ -87,7 +69,6 @@ if ($isFiltered) {
             if(isset($categoryNameCache[$catId])){
                 $groupName = $categoryNameCache[$catId];
             } else {
-                // We can optimize this by fetching all categories once, but for now:
                 $catObj = $categoriaDao->getCategoriaById($catId);
                 $groupName = $catObj ? $catObj->getNombre_categoria() : 'Otras';
                 $categoryNameCache[$catId] = $groupName;

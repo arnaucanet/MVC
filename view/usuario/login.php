@@ -35,13 +35,15 @@
                     </div>
                     <div class="d-flex gap-2">
                         <button class="btn btn-red" type="submit">Entrar</button>
-                        <a href="index.php?controller=Usuario&action=register" class="btn btn-outline-light">Registro</a>
+                        <button href="index.php?controller=Usuario&action=register" class="btn btn-outline-light">Registro</button >
                     </div>
                 </form>
             </div>
         </div>
-        <div class="auth-footer">¿Aún no tienes cuenta? <a href="index.php?controller=Usuario&action=register">Regístrate</a></div>
+        <div class="auth-footer">¿Aún no tienes cuenta? <a href="index.php?controller=Usuario&action=register" class="text-red">Regístrate</a></div>
     </div>
 </div>
+
+<link rel="stylesheet" href="public/css/login.css">
 
 <?php include 'view/parcials/footer.php'; ?>

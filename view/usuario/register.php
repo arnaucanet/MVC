@@ -43,7 +43,7 @@
                     </div>
                     <div class="d-flex gap-2">
                         <button class="btn btn-red" type="submit">Crear cuenta</button>
-                        <a href="index.php?controller=Usuario&action=login" class="btn btn-outline-light">Volver a login</a>
+                        <button href="index.php?controller=Usuario&action=login" class="btn btn-outline-light">Volver a login</button>
                     </div>
                 </form>
             </div>

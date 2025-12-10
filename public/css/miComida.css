@@ -1,0 +1,20 @@
+.text-red {
+    color: #e50914 !important;
+    transition: color 0.25s ease-in-out;
+}
+
+.text-red:hover {
+    color: #ff5a5f !important; /* rojo más brillante */
+    text-decoration: underline;
+}
+
+.btn-outline-red {
+    border: 1px solid #e50914 !important;
+    color: #e50914 !important;
+    transition: all 0.95s ease-in-out;
+}
+
+.btn-outline-red:hover {
+    background: #e50914 !important;
+    color: #fff !important;
+}

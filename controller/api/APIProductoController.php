@@ -5,7 +5,6 @@ include_once 'model/Producto.php';
 class APIProductoController {
     
     public function index(){
-        // Disable error reporting to prevent HTML warnings in JSON
         error_reporting(0);
         ini_set('display_errors', 0);
 
@@ -39,13 +38,9 @@ class APIProductoController {
                 return;
             }
 
-            // Check if exists (assuming getProductoByName exists or we skip check)
-            // $dao->getProductoByName is not defined in DAO, skipping for now or we need to add it.
-            // Let's skip it to avoid error.
-
             $product = new Producto();
             $product->setNombre($data['nombre']);
-            $product->setDescripcion($data['descripcion']); // Fixed: was $data['email']
+            $product->setDescripcion($data['descripcion']);
             $product->setPrecio($data['precio']);
             $product->setImagen($data['imagen']);
             $product->setStock($data['stock']);

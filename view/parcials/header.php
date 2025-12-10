@@ -79,7 +79,7 @@ $currentController = isset($_GET['controller']) ? strtolower($_GET['controller']
                 </div>
                 <div class="flex">Carrito</div>
               <?php else: ?>
-                <a class="btn btn-danger btn-sm" href="index.php?controller=Usuario&action=login">Iniciar sesión</a>
+                <a class="btn btn-red btn-sm" href="index.php?controller=Usuario&action=login">Iniciar sesión</a>
               <?php endif; ?>
             </div>
           </div>

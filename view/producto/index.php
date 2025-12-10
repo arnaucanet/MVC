@@ -29,7 +29,7 @@
             </div>
             
             <div class="col-md-2">
-                <button type="submit" class="btn btn-danger w-100">Filtrar</button>
+                <button type="submit" class="btn btn-red w-100">Filtrar</button>
             </div>
             
             <?php if (!empty($query) || !empty($categoriaId)): ?>
@@ -105,8 +105,8 @@ if ($isFiltered) {
                                 <div class="price"><?= isset($producto['precio']) ? '€'.htmlspecialchars($producto['precio']) : '' ?></div>
                                 <p class="card-text"><?= htmlspecialchars(substr($producto['descripcion'] ?? '',0,100)) ?>...</p>
                                 <div class="actions">
-                                    <a href="index.php?controller=Pedido&action=add&id=<?= $producto['id_producto'] ?? '' ?>" class="btn btn-danger btn-sm flex-grow-1">Añadir</a>
-                                    <a href="index.php?controller=Producto&action=detalle&id=<?= $producto['id_producto'] ?? '' ?>" class="btn btn-outline-light btn-sm">Ver más</a>
+                                    <a href="index.php?controller=Pedido&action=add&id=<?= $producto['id_producto'] ?? '' ?>" class="btn btn-red btn-sm flex-grow-1">Añadir</a>
+                                    <button href="index.php?controller=Producto&action=detalle&id=<?= $producto['id_producto'] ?? '' ?>" class="btn btn-outline-light btn-sm">Ver más</button>
                                 </div>
                             </div>
                         </div>

@@ -3,12 +3,11 @@ const API_CATEGORIA_URL = 'index.php?controller=api/APICategoria';
 
 document.addEventListener('DOMContentLoaded', () => {
     fetchProducts();
-    loadCategories(); // Cargar categorías al iniciar
+    loadCategories();
 
     document.getElementById('product-form').addEventListener('submit', handleProductFormSubmit);
 });
 
-// Función simple para cargar categorías en el select
 async function loadCategories() {
     try {
         const response = await fetch(API_CATEGORIA_URL);
@@ -57,11 +56,11 @@ function renderProductTable(products) {
         tr.innerHTML = `
             <td>#${product.id_producto}</td>
             <td>
-                <div style="font-weight: 500; color: #111827;">${escapeHtml(product.nombre)}</div>
+                <div style="font-weight: 500; color: #111827;">${product.nombre}</div>
             </td>
-            <td>${escapeHtml(product.descripcion).substring(0, 50)}...</td>
+            <td>${product.descripcion.substring(0, 50)}...</td>
             <td>${product.precio}€</td>
-            <td><img src="${escapeHtml(product.imagen)}" style="width:50px;height:50px;object-fit:cover;"></td>
+            <td><img src="${product.imagen}" style="width:50px;height:50px;object-fit:cover;"></td>
             <td>${product.stock}</td>
             <td><span class="badge ${activoClass}">${activoLabel}</span></td>
             <td>${product.id_categoria}</td>
@@ -74,11 +73,6 @@ function renderProductTable(products) {
     });
 }
 
-// escapeHtml is already defined in admin_users.js if loaded first, but to be safe we can check or rename it.
-// Since both scripts are loaded in the same page, we should avoid redefining global functions if they are identical.
-// However, to avoid dependency order issues, let's rename it or check existence.
-// For simplicity, let's assume admin_users.js loads first and defines escapeHtml. 
-// If not, we define it locally with a different name or check window.
 
 function editProduct(id) {
     const product = currentProducts.find(p => p.id_producto == id);
@@ -87,7 +81,7 @@ function editProduct(id) {
 
 function openProductModal(product = null) {
     const modal = document.getElementById('product-modal');
-    const title = document.getElementById('modal-title-product'); // We need to make sure IDs are unique in HTML
+    const title = document.getElementById('modal-title-product');
     const form = document.getElementById('product-form');
 
     modal.classList.add('open');

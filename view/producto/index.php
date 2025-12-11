@@ -103,10 +103,10 @@ if ($isFiltered) {
                             <div class="card-body">
                                 <div class="card-title"><?= htmlspecialchars($producto['nombre'] ?? '') ?></div>
                                 <div class="price"><?= isset($producto['precio']) ? '€'.htmlspecialchars($producto['precio']) : '' ?></div>
-                                <p class="card-text"><?= htmlspecialchars(substr($producto['descripcion'] ?? '',0,100)) ?>...</p>
+                                <p class="card-text"><?= htmlspecialchars(substr($producto['descripcion'] ?? '',0,100)) ?></p>
                                 <div class="actions">
                                     <a href="index.php?controller=Pedido&action=add&id=<?= $producto['id_producto'] ?? '' ?>" class="btn btn-red btn-sm flex-grow-1">Añadir</a>
-                                    <button href="index.php?controller=Producto&action=detalle&id=<?= $producto['id_producto'] ?? '' ?>" class="btn btn-outline-light btn-sm">Ver más</button>
+                                    <a href="index.php?controller=Producto&action=detalle&id=<?= $producto['id_producto'] ?? '' ?>" class="btn btn-outline-light btn-sm">Ver más</a>
                                 </div>
                             </div>
                         </div>

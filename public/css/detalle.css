@@ -35,9 +35,10 @@
 }
 
 .product-poster {
-    border-radius: 8px;
+    border-radius: 12px;
     width: 100%;
-    max-width: 400px;
+    max-width: none; /* Removed limit to let it fill the column */
+    box-shadow: 0 20px 40px rgba(0,0,0,0.5);
     transition: transform 0.3s ease;
 }
 
@@ -73,7 +74,7 @@
 
 .btn-netflix-white {
     background-color: white;
-    color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
     border: none;
     font-weight: bold;
 }

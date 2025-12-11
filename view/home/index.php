@@ -17,7 +17,7 @@
 
     <?php endif; ?>
 
-
+<div class="home-container">
 
     <?php if (!empty($productos_recomendados)): ?>
 <div class="carousel-category">Tendencias ahora</div>
@@ -31,7 +31,7 @@
             <div class="card card-netflix portrait">
                 <img src="<?= $prod['imagen'] ?>" alt="<?= $prod['nombre'] ?>">
                 <div class="card-overlay">
-                    <div class="card-title"><?= htmlspecialchars($prod['nombre']) ?></div>
+                    <div class="card-title text-white"><?= htmlspecialchars($prod['nombre']) ?></div>
                     <div class="card-sub"><?= isset($prod['precio']) ? '€'.$prod['precio'] : '' ?></div>
                 </div>
             </div>
@@ -58,7 +58,7 @@
                         <div class="card card-netflix portrait">
                             <img src="<?= $prod['imagen'] ?>" alt="<?= htmlspecialchars($prod['nombre']) ?>" loading="lazy">
                             <div class="card-overlay">
-                                <div class="card-title text-uppercase"><?= htmlspecialchars($prod['nombre']) ?></div>
+                                <div class="card-title text-white text-uppercase"><?= htmlspecialchars($prod['nombre']) ?></div>
                             </div>
                         </div>
                     </a>
@@ -93,7 +93,7 @@
             <div class="card card-netflix portrait">
                 <img src="<?= $prod['imagen'] ?>" alt="<?= $prod['nombre'] ?>">
                 <div class="card-overlay">
-                    <div class="card-title"><?= htmlspecialchars($prod['nombre']) ?></div>
+                    <div class="card-title text-white"><?= htmlspecialchars($prod['nombre']) ?></div>
                     <div class="card-sub">Nuevo</div>
                 </div>
             </div>
@@ -107,12 +107,16 @@
 <?php endif; ?>
 
 <div class="promo-strip">
-    <div class="promo-icon" aria-hidden="true">🍿</div>
+                <div class="promo-icon" aria-hidden="true">
+                <img src="public/icons/popcorn.svg" alt="Popcorn" width="64" height="64">
+            </div>
     <div class="promo-copy">
-        <p class="promo-title">Menú “Plan Básico con Sabor” — 6,99 €</p>
+        <p class="promo-title">Disfruta de nuestra comida por tan solo 8,99 €</p>
         <p class="promo-sub">Todo lo que te encanta de Netflix… ahora para comer.</p>
     </div>
     <a class="promo-btn" href="index.php?controller=Producto&action=index" role="button">Más información</a>
+</div>
+
 </div>
 
 <?php include 'view/parcials/footer.php'; ?>

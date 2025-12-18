@@ -29,14 +29,15 @@ class UsuarioController {
             return;
         }
 
-        $uid = $user->getId_usuario();
-        $sig = sha1($user->getPassword() . ($_SERVER['HTTP_USER_AGENT'] ?? ''));
-        $cookieVal = base64_encode(json_encode(['id'=>$uid,'sig'=>$sig]));
-        $expire = $remember ? time() + (30*24*3600) : 0;
-        setcookie('mvc_user', $cookieVal, $expire, '/', '', false, true);
-
+        // iniciar sesion
         if(session_status() !== PHP_SESSION_ACTIVE) session_start();
-        $_SESSION['user_id'] = $uid;
+        $_SESSION['user_id'] = $user->getId_usuario();
+
+        // si marca remember
+        if($remember){
+            // 30 dias
+            setcookie('id_usuario_guardado', $user->getId_usuario(), time() + (30*24*60*60), "/");
+        }
 
         if($user->getRol() === 'administrador'){
             header('Location: index.php?controller=Admin');
@@ -88,17 +89,20 @@ class UsuarioController {
             return;
         }
 
-        $sig = sha1($user->getPassword() . ($_SERVER['HTTP_USER_AGENT'] ?? ''));
-        $cookieVal = base64_encode(json_encode(['id'=>$newId,'sig'=>$sig]));
-        setcookie('mvc_user', $cookieVal, time() + (30*24*3600), '/', '', false, true);
+        // Iniciamos sesión automáticamente
         if(session_status() !== PHP_SESSION_ACTIVE) session_start();
         $_SESSION['user_id'] = $newId;
+
+        // Creamos la cookie simple también al registrarse (por defecto 30 días)
+        setcookie('id_usuario_guardado', $newId, time() + (30*24*60*60), "/");
 
         header('Location: index.php');
     }
 
     public function logout(){
-        setcookie('mvc_user', '', time() - 3600, '/', '', false, true);
+        // Borramos la cookie simple (poniendo fecha en el pasado)
+        setcookie('id_usuario_guardado', '', time() - 3600, '/');
+        
         if(session_status() !== PHP_SESSION_ACTIVE) session_start();
         unset($_SESSION['user_id']);
         session_destroy();

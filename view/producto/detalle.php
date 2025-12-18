@@ -44,7 +44,7 @@
                         <input type="number" id="cantidad" class="form-control bg-dark text-white text-center border-secondary" value="1" min="1" max="<?= min($stock, 10) ?>" readonly>
                         <button class="btn btn-outline-secondary text-white" type="button" onclick="updateQty(1)">+</button>
                     </div>
-                    <span class="text-muted ms-3 small">Máx. <?= min($stock, 10) ?></span>
+                    <span class="text-white ms-3 small">Máx. <?= min($stock, 10) ?></span>
                 </div>
                 <?php endif; ?>
 

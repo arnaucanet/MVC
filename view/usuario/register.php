@@ -1,7 +1,9 @@
-<?php include 'view/parcials/header.php'; ?>
+<?php 
+if(session_status() !== PHP_SESSION_ACTIVE) session_start();
+include 'view/parcials/header.php'; 
+?>
 <div class="container" style="padding-top:90px;">
 
-<?php if(session_status() !== PHP_SESSION_ACTIVE) session_start(); ?>
 <?php if(!empty($_SESSION['error'])): ?>
     <div class="alert alert-danger"><?= htmlspecialchars($_SESSION['error']) ?></div>
     <?php unset($_SESSION['error']); ?>
@@ -41,9 +43,9 @@
                         <label class="form-label">Dirección</label>
                         <input type="text" name="direccion" class="form-control" />
                     </div>
-                    <div class="d-flex gap-2">
+                    <div class="d-flex align-items-center gap-2">
                         <button class="btn btn-red" type="submit">Crear cuenta</button>
-                        <button href="index.php?controller=Usuario&action=login" class="btn btn-outline-light">Volver a login</button>
+                        <a href="index.php?controller=Usuario&action=login" class="btn btn-outline-light">Volver a login</a>
                     </div>
                 </form>
             </div>

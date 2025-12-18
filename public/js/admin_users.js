@@ -4,7 +4,10 @@ let currentUsers = [];
 document.addEventListener('DOMContentLoaded', () => {
     fetchUsers();
 
-    document.getElementById('user-form').addEventListener('submit', handleFormSubmit);
+    const userForm = document.getElementById('user-form');
+    if(userForm) {
+        userForm.addEventListener('submit', handleFormSubmit);
+    }
 });
 
 function fetchUsers() {
@@ -22,22 +25,23 @@ function renderTable(users) {
     const tbody = document.querySelector('#users-table tbody');
     tbody.innerHTML = '';
     
-    if(users.length === 0){
+    if(!Array.isArray(users) || users.length === 0){
         tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;">No hay usuarios</td></tr>';
         return;
     }
 
     users.forEach(user => {
         const tr = document.createElement('tr');
-        const roleClass = user.rol === 'administrador' ? 'badge-admin' : 'badge-client';
-        const roleLabel = user.rol.charAt(0).toUpperCase() + user.rol.slice(1);
+        const role = user.rol;
+        const roleClass = role === 'administrador' ? 'badge-admin' : 'badge-client';
+        const roleLabel = role.charAt(0).toUpperCase() + role.slice(1);
         
         tr.innerHTML = `
             <td>#${user.id_usuario}</td>
             <td>
-                <div style="font-weight: 500; color: #111827;">${escapeHtml(user.nombre)}</div>
+                <div style="font-weight: 500; color: #111827;">${user.nombre}</div>
             </td>
-            <td>${escapeHtml(user.email)}</td>
+            <td>${user.email}</td>
             <td><span class="badge ${roleClass}">${roleLabel}</span></td>
             <td>
                 <button class="btn btn-edit" onclick="editUser(${user.id_usuario})">Editar</button>
@@ -48,15 +52,6 @@ function renderTable(users) {
     });
 }
 
-function escapeHtml(text) {
-    if (!text) return '';
-    return text
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
-}
 
 function editUser(id) {
     const user = currentUsers.find(u => u.id_usuario == id);

@@ -40,9 +40,9 @@
                 <div class="quantity-selector mb-4 d-flex align-items-center">
                     <label for="cantidad" class="text-white me-3 fw-bold">Cantidad:</label>
                     <div class="input-group" style="width: 140px;">
-                        <button class="btn btn-outline-secondary text-white" type="button" onclick="updateQty(-1)">-</button>
+                        <button class="btn btn-outline-secondary text-white" type="button" onclick="cambiarCantidad(-1)">-</button>
                         <input type="number" id="cantidad" class="form-control bg-dark text-white text-center border-secondary" value="1" min="1" max="<?= min($stock, 10) ?>" readonly>
-                        <button class="btn btn-outline-secondary text-white" type="button" onclick="updateQty(1)">+</button>
+                        <button class="btn btn-outline-secondary text-white" type="button" onclick="cambiarCantidad(1)">+</button>
                     </div>
                     <span class="text-muted ms-3 small">Máx. <?= min($stock, 10) ?></span>
                 </div>
@@ -50,7 +50,7 @@
 
                 <div class="action-buttons d-flex gap-3 flex-wrap">
                     <?php if ($isAvailable): ?>
-                    <a href="#" onclick="addToCart(event, <?= $producto['id_producto'] ?>)" class="btn btn-netflix-white btn-lg flex-grow-1">
+                    <a href="#" onclick="anadirAlCarrito(event, <?= $producto['id_producto'] ?>, '<?= addslashes($producto['nombre']) ?>', <?= $producto['precio'] ?>, '<?= $producto['imagen'] ?>')" class="btn btn-netflix-white btn-lg flex-grow-1">
                         <img src="/MVC/public/icons/cart-black.svg" alt="icon" width="24" height="24" class="me-2">
                         Añadir al Carrito
                     </a>
@@ -73,23 +73,26 @@
 <link rel="stylesheet" href="public/css/detalle.css">
 
 <script>
-function updateQty(change) {
+function cambiarCantidad(cambio) {
     const input = document.getElementById('cantidad');
-    if (!input) return;
-    let val = parseInt(input.value) + change;
-    const max = parseInt(input.getAttribute('max'));
-    const min = parseInt(input.getAttribute('min'));
     
-    if (val >= min && val <= max) {
-        input.value = val;
+    let nuevoValor = parseInt(input.value) + cambio;
+    
+    const maximo = parseInt(input.getAttribute('max'));
+    const minimo = parseInt(input.getAttribute('min'));
+    
+    if (nuevoValor >= minimo && nuevoValor <= maximo) {
+        input.value = nuevoValor;
     }
 }
 
-function addToCart(e, id) {
-    e.preventDefault();
+function anadirAlCarrito(evento, id, nombre, precio, imagen) {
+    evento.preventDefault();
+    
     const input = document.getElementById('cantidad');
-    const qty = input ? input.value : 1;
-    window.location.href = `index.php?controller=Pedido&action=add&id=${id}&cantidad=${qty}`;
+    const cantidad = input ? input.value : 1;
+    
+    addToCartJS(id, nombre, precio, imagen, cantidad);
 }
 </script>
 

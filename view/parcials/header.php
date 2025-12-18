@@ -120,7 +120,6 @@ $currentController = isset($_GET['controller']) ? strtolower($_GET['controller']
                     <li><a class="dropdown-item" href="index.php?controller=Usuario&action=logout">Cerrar sesión en NetflixEats</a></li>
                   </ul>
                 </div>
-                <div class="flex">Carrito</div>
               <?php else: ?>
                 <a class="btn btn-red btn-sm" href="index.php?controller=Usuario&action=login">Iniciar sesión</a>
               <?php endif; ?>

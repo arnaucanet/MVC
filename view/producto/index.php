@@ -82,7 +82,7 @@ if ($isFiltered) {
 ?>
 
 <?php if(empty($productos)): ?>
-    <div class="alert alert-dark text-center mt-5" role="alert">
+    <div class="alert-dark text-center mt-5" role="alert">
         <h3>No se encontraron productos</h3>
         <p>Intenta con otros términos de búsqueda o filtros.</p>
         <a href="index.php?controller=Producto&action=index" class="btn btn-outline-light mt-3">Ver todos los productos</a>

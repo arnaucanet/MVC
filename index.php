@@ -8,7 +8,7 @@ $action = $_GET['action'] ?? 'index';
 $controllerName = $controllerParam . 'Controller';
 $controllerPath = "controller/$controllerName.php";
 
-// Check if it's an API controller (e.g. controller=api/APIUsuario)
+// comprobar si es api
 if (strpos($controllerParam, 'api/') === 0) {
     header('Content-Type: application/json');
     header('Access-Control-Allow-Origin: *');
@@ -20,28 +20,30 @@ if (strpos($controllerParam, 'api/') === 0) {
         exit;
     }
     
-    // Extract class name from path (e.g. api/APIUsuarioController -> APIUsuarioController)
+    // sacar el nombre del controlador
     $parts = explode('/', $controllerName);
     $className = end($parts);
 } else {
+    // aqui ya viene correcto
     $className = $controllerName;
 }
 
+//comprobar si existe el controlador
 if(file_exists($controllerPath)){
     require_once $controllerPath;
 } else {
-    // Fallback or 404
     if(file_exists("controller/$className.php")){
          require_once "controller/$className.php";
     }
 }
-
+//comprobar si la clase existe
 if(class_exists($className)){
     $controllerObj = new $className();
+    //comprobar si el metodo existe
     if(method_exists($controllerObj, $action)){
         $controllerObj->$action();
     } else {
-        // Action not found
+        // accion no encontrada
         if (strpos($controllerParam, 'api/') === 0) {
              http_response_code(404);
              echo json_encode(['error' => 'Action not found']);

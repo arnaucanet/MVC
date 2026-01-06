@@ -91,13 +91,24 @@ const Carrito = {
     actualizarVista() {
         const contenedorItems = document.getElementById('cartItems');
         const elementoTotal = document.getElementById('cartTotal');
+        const botonPagar = document.getElementById('checkoutBtn');
         
         if (!contenedorItems || !elementoTotal) return;
 
         if (this.productos.length === 0) {
             contenedorItems.innerHTML = '<div class="text-center text-white">Tu carrito está vacío</div>';
             elementoTotal.innerText = '0.00 €';
+            if(botonPagar) {
+                botonPagar.disabled = true;
+                botonPagar.classList.add('disabled');
+            }
             return;
+        }
+        
+        // si hay productos, activamos el boton
+        if(botonPagar) {
+            botonPagar.disabled = false;
+            botonPagar.classList.remove('disabled');
         }
 
         let html = '';

@@ -106,7 +106,7 @@
                         <?php if (!empty($carrito)): ?>
                             <?php foreach($carrito as $item): ?>
                             <div class="cart-item-preview">
-                                <img src="<?= $item['imagen']?>" class="cart-item-img" alt="Prod">
+                                <img src="<?= $item['image'] ?>" class="cart-item-img" alt="Prod">
                                 <div class="cart-item-details">
                                     <h6 class="fw-bold"><?= number_format($item['price'], 2) ?> €</h6>
                                     <p class="text-white fw-bold"><?= htmlspecialchars($item['name']) ?></p>

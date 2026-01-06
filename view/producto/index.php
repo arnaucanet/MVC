@@ -105,7 +105,7 @@ if ($isFiltered) {
                                 <div class="price"><?= isset($producto['precio']) ? '€'.htmlspecialchars($producto['precio']) : '' ?></div>
                                 <p class="card-text"><?= htmlspecialchars(substr($producto['descripcion'] ?? '',0,100)) ?></p>
                                 <div class="actions">
-                                    <a href="index.php?controller=Pedido&action=add&id=<?= $producto['id_producto'] ?? '' ?>" class="btn btn-red btn-sm flex-grow-1">Añadir</a>
+                                    <button onclick='addToCartJS(<?= $producto['id_producto'] ?>, <?= json_encode($producto['nombre']) ?>, <?= $producto['precio'] ?>, <?= json_encode($producto['imagen']) ?>)' class="btn btn-red btn-sm flex-grow-1">Añadir</button>
                                     <a href="index.php?controller=Producto&action=detalle&id=<?= $producto['id_producto'] ?? '' ?>" class="btn btn-outline-light btn-sm">Ver más</a>
                                 </div>
                             </div>

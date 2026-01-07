@@ -35,4 +35,32 @@ class PedidoDAO {
 
         return $stmt->execute();
     }
+
+    public function getPedidosByUsuario($id_usuario) {
+        $stmt = $this->db->prepare("SELECT * FROM pedido WHERE id_usuario = ? ORDER BY fecha_pedido DESC");
+        
+        $stmt->bind_param("i", $id_usuario);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        
+        $pedidos = [];
+        while ($row = $result->fetch_assoc()) {
+            $pedido = new Pedido();
+            $pedido->setId_pedido($row['id_pedido']);
+            $pedido->setId_usuario($row['id_usuario']);
+            $pedido->setId_oferta($row['id_oferta']);
+            $pedido->setFecha_pedido($row['fecha_pedido']);
+            $pedido->setEstado($row['estado']);
+            $pedido->setTotal($row['total']);
+            $pedido->setMoneda($row['moneda']);
+            $pedido->setNombre_destinatario($row['nombre_destinatario']);
+            $pedido->setDireccion_envio($row['direccion_envio']);
+            $pedido->setCp($row['cp']);
+            $pedido->setCiudad($row['ciudad']);
+            $pedido->setTelefono_contacto($row['telefono_contacto']);
+            
+            $pedidos[] = $pedido;
+        }
+        return $pedidos;
+    }
 }

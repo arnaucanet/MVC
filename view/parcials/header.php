@@ -113,6 +113,7 @@ $currentController = isset($_GET['controller']) ? strtolower($_GET['controller']
                       <hr class="dropdown-divider">
                     </li>
                     <li><a class="dropdown-item" href="index.php?controller=Usuario&action=perfil">Cuenta</a></li>
+                    <li><a class="dropdown-item" href="index.php?controller=Pedido&action=mis_pedidos">Mis Pedidos</a></li>
                     <li><a class="dropdown-item" href="index.php?controller=Info&action=help">Centro de ayuda</a></li>
                     <li>
                       <hr class="dropdown-divider">

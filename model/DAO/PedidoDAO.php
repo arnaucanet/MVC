@@ -90,4 +90,20 @@ class PedidoDAO {
         
         return $pedido;
     }
+
+    public function update($pedido) {
+        // solo actualizamos el estado
+        $stmt = $this->db->prepare("UPDATE pedido SET estado = ? WHERE id_pedido = ?");
+        $estado = $pedido->getEstado();
+        $id = $pedido->getId_pedido();
+        
+        $stmt->bind_param("si", $estado, $id);
+        return $stmt->execute();
+    }
+
+    public function delete($id) {
+        $stmt = $this->db->prepare("DELETE FROM pedido WHERE id_pedido = ?");
+        $stmt->bind_param("i", $id);
+        return $stmt->execute();
+    }
 }

@@ -23,6 +23,9 @@
             <a href="#" onclick="showSection('offers')" id="nav-offers">
                 Ofertas
             </a>
+            <a href="#" onclick="showSection('logs')" id="nav-logs">
+                Logs
+            </a>
         </nav>
         <div class="sidebar-footer">
             <a href="index.php?controller=Usuario&action=logout">← Cerrar Sesión</a>
@@ -87,12 +90,44 @@
                 </div>
             </div>
         </div>
+
+        <!-- orders -->
         <div id="orders-section" class="section">
-            <div class="header-bar"><h1>Pedidos</h1></div>
-            <div class="card"><p>...</p></div>
+            <div class="header-bar">
+                <h1>Gestión de Pedidos</h1>
+            </div>
+            
+            <div class="card">
+                <div class="table-container">
+                    <table id="orders-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Usuario ID</th>
+                                <th>Fecha</th>
+                                <th>Destinatario</th>
+                                <th>Total</th>
+                                <th>Estado</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- carga de datos con js -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
+
+        <!-- offers -->
         <div id="offers-section" class="section">
             <div class="header-bar"><h1>Ofertas</h1></div>
+            <div class="card"><p>...</p></div>
+        </div>
+
+        <!-- logs -->
+        <div id="logs-section" class="section">
+            <div class="header-bar"><h1>Logs</h1></div>
             <div class="card"><p>...</p></div>
         </div>
     </div>
@@ -190,8 +225,35 @@
         </div>
     </div>
 
+    <!-- modal pedidos -->
+    <div id="order-modal" class="modal">
+        <div class="modal-content">
+            <h3 id="modal-title-order" style="margin-top:0; margin-bottom: 20px; font-size: 20px;">Editar Pedido</h3>
+            <form id="order-form">
+                <input type="hidden" id="order-id">
+                
+                <div class="form-group">
+                    <label>Estado del Pedido</label>
+                    <select id="order-estado">
+                        <option value="pendiente">pendiente</option>
+                        <option value="en preparación">en preparación</option>
+                        <option value="enviado">enviado</option>
+                        <option value="entregado">entregado</option>
+                        <option value="cancelado">cancelado</option>
+                    </select>
+                </div>
+
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-cancel" onclick="closeOrderModal()">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <script src="public/js/admin_users.js"></script>
     <script src="public/js/admin_products.js"></script>
+    <script src="public/js/admin_orders.js"></script>
     <script>
         //poder cambiar de seccion
         function showSection(id) {

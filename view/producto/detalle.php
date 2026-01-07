@@ -60,10 +60,10 @@
                     </button>
                     <?php endif; ?>
 
-                    <button href="index.php?controller=MiComida&action=guardar&id=<?= $producto['id_producto'] ?>" class="btn btn-netflix-transparent btn-lg flex-grow-1">
+                    <a href="index.php?controller=MiComida&action=guardar&id=<?= $producto['id_producto'] ?>" class="btn btn-netflix-transparent btn-lg flex-grow-1">
                         <img src="/MVC/public/icons/heart-white.svg" alt="icon" width="24" height="24" class="me-2">
                         Añadir a Mi Comida
-                    </button>
+                    </a>
                 </div>
             </div>
         </div>

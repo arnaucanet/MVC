@@ -8,6 +8,11 @@ class Pedido {
     private $estado;
     private $total;
     private $moneda;
+    private $nombre_destinatario;
+    private $direccion_envio;
+    private $cp;
+    private $ciudad;
+    private $telefono_contacto;
 
     /**
      * Get the value of id_pedido
@@ -147,5 +152,105 @@ class Pedido {
             $this->moneda = $moneda;
 
             return $this;
+    }
+
+    /**
+     * Get the value of nombre_destinatario
+     */ 
+    public function getNombre_destinatario()
+    {
+        return $this->nombre_destinatario;
+    }
+
+    /**
+     * Set the value of nombre_destinatario
+     *
+     * @return  self
+     */ 
+    public function setNombre_destinatario($nombre_destinatario)
+    {
+        $this->nombre_destinatario = $nombre_destinatario;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of direccion_envio
+     */ 
+    public function getDireccion_envio()
+    {
+        return $this->direccion_envio;
+    }
+
+    /**
+     * Set the value of direccion_envio
+     *
+     * @return  self
+     */ 
+    public function setDireccion_envio($direccion_envio)
+    {
+        $this->direccion_envio = $direccion_envio;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of cp
+     */ 
+    public function getCp()
+    {
+        return $this->cp;
+    }
+
+    /**
+     * Set the value of cp
+     *
+     * @return  self
+     */ 
+    public function setCp($cp)
+    {
+        $this->cp = $cp;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of ciudad
+     */ 
+    public function getCiudad()
+    {
+        return $this->ciudad;
+    }
+
+    /**
+     * Set the value of ciudad
+     *
+     * @return  self
+     */ 
+    public function setCiudad($ciudad)
+    {
+        $this->ciudad = $ciudad;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of telefono_contacto
+     */ 
+    public function getTelefono_contacto()
+    {
+        return $this->telefono_contacto;
+    }
+
+    /**
+     * Set the value of telefono_contacto
+     *
+     * @return  self
+     */ 
+    public function setTelefono_contacto($telefono_contacto)
+    {
+        $this->telefono_contacto = $telefono_contacto;
+
+        return $this;
     }
 }

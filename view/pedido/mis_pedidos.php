@@ -33,13 +33,16 @@
                             <td>
                                 <?php 
                                     $estado = $pedido->getEstado();
-                                    $clase = 'bg-secondary';
-                                    if($estado === 'entregado') $clase = 'bg-success';
-                                    elseif($estado === 'en proceso') $clase = 'bg-primary';
-                                    elseif($estado === 'pendiente') $clase = 'bg-warning text-dark';
-                                    elseif($estado === 'cancelado') $clase = 'bg-danger';
+                                    
+                                    $clase = 'badge-secondary';
+                                    if($estado === 'entregado') $clase = 'badge-success';
+                                    elseif($estado === 'en preparación') $clase = 'badge-primary';
+                                    elseif($estado === 'en proceso') $clase = 'badge-primary';
+                                    elseif($estado === 'enviado') $clase = 'badge-primary';
+                                    elseif($estado === 'pendiente') $clase = 'badge-warning';
+                                    elseif($estado === 'cancelado') $clase = 'badge-danger';
                                 ?>
-                                <span class="badge <?= $clase ?>"><?= $estado ?></span>
+                                <span class="badge <?= $clase ?>"><?= htmlspecialchars($estado) ?></span>
                             </td>
                             <td class="fw-bold"><?= number_format($pedido->getTotal(), 2) ?> <?= htmlspecialchars($pedido->getMoneda()) ?></td>
                             <td class="text-end">

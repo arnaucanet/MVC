@@ -8,7 +8,7 @@
         </div>
         <div class="col-md-6">
             <div class="p-5 bg-dark border border-secondary rounded text-center">
-                <h2 class="text-danger display-1 fw-bold">N</h2>
+                <h2 class="display-1 fw-bold" style="color: #e50914">N</h2>
                 <p class="mt-3">NetflixEats HQ</p>
             </div>
         </div>
@@ -17,19 +17,19 @@
     <div class="row g-4 mt-4">
         <div class="col-md-4">
             <div class="text-center">
-                <h3 class="text-danger mb-3">Misión</h3>
+                <h3 class="mb-3"  style="color: #e50914">Misión</h3>
                 <p class="text-white-50">Llevar los sabores de la pantalla a tu mesa, creando momentos inolvidables.</p>
             </div>
         </div>
         <div class="col-md-4">
             <div class="text-center">
-                <h3 class="text-danger mb-3">Visión</h3>
+                <h3 class="mb-3"  style="color: #e50914">Visión</h3>
                 <p class="text-white-50">Ser la plataforma líder mundial en experiencias gastronómicas temáticas.</p>
             </div>
         </div>
         <div class="col-md-4">
             <div class="text-center">
-                <h3 class="text-danger mb-3">Valores</h3>
+                <h3 class="mb-3"  style="color: #e50914">Valores</h3>
                 <p class="text-white-50">Innovación, Calidad, Pasión y Diversión.</p>
             </div>
         </div>

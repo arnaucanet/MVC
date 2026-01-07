@@ -41,9 +41,9 @@
                                 ?>
                                 <span class="badge <?= $clase ?>"><?= $estado ?></span>
                             </td>
-                            <td class="fw-bold"><?= $pedido->getTotal() ?> <?= $pedido->getMoneda() ?></td>
+                            <td class="fw-bold"><?= number_format($pedido->getTotal(), 2) ?> <?= htmlspecialchars($pedido->getMoneda()) ?></td>
                             <td class="text-end">
-                                <button class="btn btn-sm btn-outline-light" disabled>Ver detalles</button>
+                                <a href="index.php?controller=Pedido&action=detalle&id=<?= $pedido->getId_pedido() ?>" class="btn btn-sm btn-outline-light">Ver detalles</a>
                             </td>
                         </tr>
                     <?php endforeach; ?>

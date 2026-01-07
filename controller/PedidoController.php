@@ -119,4 +119,21 @@ class PedidoController {
             echo "Error al crear el pedido. Por favor intente nuevamente.";
         }
     }
+
+    public function mis_pedidos() {
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
+
+        if (!isset($_SESSION['user_id'])) {
+            header("Location: index.php?controller=Usuario&action=login");
+            exit();
+        }
+
+        $userId = $_SESSION['user_id'];
+        $pedidoDAO = new PedidoDAO();
+        $pedidos = $pedidoDAO->getPedidosByUsuario($userId);
+
+        include 'view/pedido/mis_pedidos.php';
+    }
 }

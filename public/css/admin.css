@@ -157,6 +157,11 @@ tr:hover { background-color: #f9fafb; }
 }
 .badge-admin { background-color: #fee2e2; color: #991b1b; }
 .badge-client { background-color: #d1fae5; color: #065f46; }
+.badge-success { background-color: #d1fae5; color: #065f46; }
+.badge-primary { background-color: #dbeafe; color: #1e40af; }
+.badge-warning { background-color: #fef3c7; color: #e50914; }
+.badge-danger { background-color: #fee2e2; color: #991b1b; }
+.badge-secondary { background-color: #f3f4f6; color: #374151; }
 
 .modal {
     display: none;

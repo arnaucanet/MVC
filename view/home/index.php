@@ -7,8 +7,9 @@
         <p><?= $producto_destacado['descripcion'] ?></p>
 
         <div class="cta">
-            <a href="index.php?controller=Pedido&action=add&id=<?= $producto_destacado['id_producto'] ?>" 
-               class="btn-netflix-white text-decoration-none">Pedir ahora</a>
+            <button onclick='addToCartJS(<?= $producto_destacado['id_producto'] ?>, <?= json_encode($producto_destacado['nombre']) ?>, <?= $producto_destacado['precio'] ?>, <?= json_encode($producto_destacado['imagen']) ?>)' class="btn-netflix-white text-decoration-none">
+                Pedir ahora
+            </button>
             <a href="index.php?controller=Producto&action=detalle&id=<?= $producto_destacado['id_producto'] ?>" 
                class="btn-netflix-transparent text-decoration-none">Mas informacion</a>
         </div>

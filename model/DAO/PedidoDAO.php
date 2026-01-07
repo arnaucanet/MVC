@@ -33,7 +33,8 @@ class PedidoDAO {
         
         $stmt->bind_param("iissdssssss", $id_usuario, $id_oferta, $fecha_pedido, $estado, $total, $moneda, $nombre, $direccion, $cp, $ciudad, $tlf);
 
-        return $stmt->execute();
+        $stmt->execute();
+        return $this->db->insert_id;
     }
 
     public function getPedidosByUsuario($id_usuario) {
@@ -62,5 +63,31 @@ class PedidoDAO {
             $pedidos[] = $pedido;
         }
         return $pedidos;
+    }
+
+    public function getPedidoById($id) {
+        $stmt = $this->db->prepare("SELECT * FROM pedido WHERE id_pedido = ?");
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $row = $result->fetch_assoc();
+        
+        if (!$row) return null;
+
+        $pedido = new Pedido();
+        $pedido->setId_pedido($row['id_pedido']);
+        $pedido->setId_usuario($row['id_usuario']);
+        $pedido->setId_oferta($row['id_oferta']);
+        $pedido->setFecha_pedido($row['fecha_pedido']);
+        $pedido->setEstado($row['estado']);
+        $pedido->setTotal($row['total']);
+        $pedido->setMoneda($row['moneda']);
+        $pedido->setNombre_destinatario($row['nombre_destinatario']);
+        $pedido->setDireccion_envio($row['direccion_envio']);
+        $pedido->setCp($row['cp']);
+        $pedido->setCiudad($row['ciudad']);
+        $pedido->setTelefono_contacto($row['telefono_contacto']);
+        
+        return $pedido;
     }
 }

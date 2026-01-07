@@ -136,4 +136,36 @@ class PedidoController {
 
         include 'view/pedido/mis_pedidos.php';
     }
+
+    public function detalle() {
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
+
+        if (!isset($_SESSION['user_id'])) {
+            header("Location: index.php?controller=Usuario&action=login");
+            exit();
+        }
+
+        $id_pedido = isset($_GET['id']) ? (int)$_GET['id'] : 0;
+        if($id_pedido <= 0){
+             header("Location: index.php?controller=Pedido&action=mis_pedidos");
+             exit();
+        }
+
+        $userId = $_SESSION['user_id'];
+        $pedidoDAO = new PedidoDAO();
+        $pedido = $pedidoDAO->getPedidoById($id_pedido);
+
+        // comprobar que el pedido existe y es del usuario
+        if(!$pedido || $pedido->getId_usuario() != $userId){
+             header("Location: index.php?controller=Pedido&action=mis_pedidos");
+             exit();
+        }
+
+        $detalleDAO = new DetallePedidoDAO();
+        $detalles = $detalleDAO->getDetallesByPedidoId($id_pedido);
+
+        include 'view/pedido/detalle.php';
+    }
 }

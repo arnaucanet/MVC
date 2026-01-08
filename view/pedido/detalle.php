@@ -66,10 +66,22 @@
                     <h5 class="mb-0 text-white">Resumen</h5>
                 </div>
                 <div class="card-body">
+                    <?php 
+                        $subtotal_real = 0;
+                        foreach($detalles as $d) {
+                            $subtotal_real += $d['subtotal'];
+                        }
+                    ?>
                     <div class="d-flex justify-content-between mb-2 text-white-50">
                         <span>Subtotal</span>
-                        <span><?= $pedido->getTotal() ?> €</span>
+                        <span><?= number_format($subtotal_real, 2) ?> €</span>
                     </div>
+                    <?php if(isset($oferta) && $oferta): ?>
+                    <div class="d-flex justify-content-between mb-2 text-success">
+                        <span>Descuento (<?= $oferta->getCodigo() ?>)</span>
+                        <span>-<?= number_format($subtotal_real - $pedido->getTotal(), 2) ?> €</span>
+                    </div>
+                    <?php endif; ?>
                     <div class="d-flex justify-content-between mb-2 text-white-50">
                         <span>Envío</span>
                         <span>0.00 €</span>

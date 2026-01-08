@@ -5,32 +5,28 @@ include_once 'model/DetallePedido.php';
 include_once 'model/DAO/PedidoDAO.php';
 include_once 'model/DAO/DetallePedidoDAO.php';
 include_once 'model/DAO/UsuarioDAO.php';
+include_once 'model/DAO/OfertaDAO.php';
 
 class PedidoController {
     
     public function checkout() {
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
         
-        // verificamos que recibimos datos por tramitar pedido
+        // si llegan datos los actualizamos
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['cart_data'])) {
-            
-            //datos del carrito
             $datosEnBruto = $_POST['cart_data'];
-            
-            //convertir texto en array asociativo y no en objeto
             $carrito = json_decode($datosEnBruto, true);
-            
-
-            // no olvidar que productos se estan comprando
-            if (session_status() == PHP_SESSION_NONE) {
-                session_start();
-            }
             $_SESSION['checkout_cart'] = $carrito;
-            
-            // cargamos la vista y le pasamos la variable $carrito
+        }
+
+        // mostrar vista si tenemos datos en sesion
+        if (isset($_SESSION['checkout_cart']) && !empty($_SESSION['checkout_cart'])) {
+            $carrito = $_SESSION['checkout_cart'];
             include 'view/pedido/checkout.php';
-            
         } else {
-            // redireciconar a index si alguien accede sin datos
+            // redirigir si no hay datos
             header("Location: index.php");
         }
     }
@@ -74,10 +70,24 @@ class PedidoController {
             $total += $item['price'] * $item['cantidad'];
         }
 
+        //gestionar descuento por sesion
+        $id_oferta = null;
+        if (isset($_SESSION['oferta_aplicada'])) {
+            $id_oferta = $_SESSION['oferta_aplicada']['id'];
+            $descuentoPorc = $_SESSION['oferta_aplicada']['descuento'];
+            
+            // aplicar el descuento
+            $descuento = $total * ($descuentoPorc / 100);
+            $total = $total - $descuento;
+            
+            // borrar descuento de sesion
+            unset($_SESSION['oferta_aplicada']);
+        }
+
         // crear Pedido
         $pedido = new Pedido();
         $pedido->setId_usuario($userId);
-        $pedido->setId_oferta(null); // Explicit null
+        $pedido->setId_oferta($id_oferta);
         $pedido->setFecha_pedido(date('Y-m-d H:i:s'));
         $pedido->setEstado('pendiente');
         $pedido->setTotal($total);
@@ -166,6 +176,40 @@ class PedidoController {
         $detalleDAO = new DetallePedidoDAO();
         $detalles = $detalleDAO->getDetallesByPedidoId($id_pedido);
 
+        $oferta = null;
+        if ($pedido->getId_oferta()) {
+            include_once 'model/DAO/OfertaDAO.php';
+            $ofertaDAO = new OfertaDAO();
+            $oferta = $ofertaDAO->getOfertaById($pedido->getId_oferta());
+        }
+
         include 'view/pedido/detalle.php';
+    }
+
+    public function aplicarDescuento() {
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
+
+        if (isset($_POST['codigo'])) {
+            $codigo = $_POST['codigo'];
+            $ofertaDAO = new OfertaDAO();
+            $oferta = $ofertaDAO->getOfertaByCodigo($codigo);
+            
+            if ($oferta) {
+                $_SESSION['oferta_aplicada'] = [
+                    'id' => $oferta->getId_oferta(),
+                    'codigo' => $oferta->getCodigo(),
+                    'descuento' => $oferta->getDescuento_porcentaje()
+                ];
+                unset($_SESSION['error_cupon']);
+            } else {
+                $_SESSION['error_cupon'] = 'El código no es válido.';
+                unset($_SESSION['oferta_aplicada']);
+            }
+        }
+        
+        header('Location: index.php?controller=Pedido&action=checkout');
+        exit();
     }
 }

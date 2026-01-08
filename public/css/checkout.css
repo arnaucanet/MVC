@@ -198,3 +198,9 @@ body {
 .btn-save-continue:hover {
     background-color: #f40612;
 }
+
+.btn-coupon { background: #e50914; color: white; border: none; font-weight: 600; }
+.btn-coupon:hover { background: #c10811; color: white; }
+.btn-coupon:disabled { background: #555; }
+.btn-coupon { background: #e50914; color: white; border: none; font-weight: 600; min-width: 80px; }
+.btn-coupon:hover { background: #c10811; color: white; }

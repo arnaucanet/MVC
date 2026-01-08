@@ -1,5 +1,6 @@
 <?php
 include_once 'model/DAO/UsuarioDAO.php';
+include_once 'model/DAO/LogDAO.php';
 include_once 'model/Usuario.php';
 
 class APIUsuarioController
@@ -7,8 +8,15 @@ class APIUsuarioController
 
     public function index()
     {
+        // iniciar sesion para saber usuario
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
+        $adminId = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
+
         $method = $_SERVER['REQUEST_METHOD'];
         $dao = new UsuarioDAO();
+        $logDao = new LogDAO();
 
         if ($method === 'GET') {
             if (isset($_GET['id'])) {
@@ -54,6 +62,10 @@ class APIUsuarioController
 
             $id = $dao->create($user);
             if ($id) {
+                // guardar log nuevo usuario
+                if ($adminId) {
+                    $logDao->insert($adminId, "Creo usuario nuevo: " . $user->getEmail());
+                }
                 http_response_code(201);
                 echo json_encode(['id' => $id, 'message' => 'User created']);
             } else {
@@ -77,17 +89,44 @@ class APIUsuarioController
                 return;
             }
 
-            if (isset($data['nombre'])) $user->setNombre($data['nombre']);
-            if (isset($data['email'])) $user->setEmail($data['email']);
-            if (isset($data['direccion'])) $user->setDireccion($data['direccion']);
-            if (isset($data['telefono'])) $user->setTelefono($data['telefono']);
-            if (isset($data['rol'])) $user->setRol($data['rol']);
+            $cambios = [];
+            
+            // comprobar cambios
+            if (isset($data['nombre']) && $data['nombre'] !== $user->getNombre()) {
+                $cambios[] = "nombre";
+                $user->setNombre($data['nombre']);
+            }
+            if (isset($data['email']) && $data['email'] !== $user->getEmail()) {
+                $cambios[] = "email";
+                $user->setEmail($data['email']);
+            }
+            if (isset($data['direccion']) && $data['direccion'] !== $user->getDireccion()) {
+                $cambios[] = "direccion";
+                $user->setDireccion($data['direccion']);
+            }
+            if (isset($data['telefono']) && $data['telefono'] !== $user->getTelefono()) {
+                $cambios[] = "telefono";
+                $user->setTelefono($data['telefono']);
+            }
+            if (isset($data['rol']) && $data['rol'] !== $user->getRol()) {
+                $cambios[] = "rol";
+                $user->setRol($data['rol']);
+            }
 
             if (isset($data['password']) && !empty($data['password'])) {
+                $cambios[] = "password";
                 $user->setPassword(password_hash($data['password'], PASSWORD_DEFAULT));
             }
 
             if ($dao->update($user)) {
+                // guardar log actualizacion
+                if ($adminId) {
+                    $accion = "Actualizo usuario ID: " . $user->getId_usuario();
+                    if (!empty($cambios)) {
+                        $accion .= ". Campos modificados: " . implode(", ", $cambios);
+                    }
+                    $logDao->insert($adminId, $accion);
+                }
                 echo json_encode(['message' => 'User updated']);
             } else {
                 http_response_code(500);
@@ -102,6 +141,10 @@ class APIUsuarioController
             }
 
             if ($id && $dao->delete($id)) {
+                // guardar log borrado
+                if ($adminId) {
+                    $logDao->insert($adminId, "Elimino usuario ID: " . $id);
+                }
                 echo json_encode(['message' => 'User deleted']);
             } else {
                 http_response_code(500);

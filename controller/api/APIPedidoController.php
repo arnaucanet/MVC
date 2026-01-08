@@ -1,5 +1,6 @@
 <?php
 include_once 'model/DAO/PedidoDAO.php';
+include_once 'model/DAO/LogDAO.php';
 include_once 'model/Pedido.php';
 
 class APIPedidoController
@@ -7,12 +8,18 @@ class APIPedidoController
 
     public function index()
     {
+        // iniciar sesion si no esta iniciada
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
+
         // desactivar err visuales
         error_reporting(0);
         ini_set('display_errors', 0);
 
         $method = $_SERVER['REQUEST_METHOD'];
         $dao = new PedidoDAO();
+        $logDao = new LogDAO();
 
         header('Content-Type: application/json');
 
@@ -48,9 +55,29 @@ class APIPedidoController
                 return;
             }
 
-            if (isset($data['estado'])) $pedido->setEstado($data['estado']);
+            $cambios = [];
+            $oldEstado = $pedido->getEstado();
+            
+            if (isset($data['estado'])) {
+                $pedido->setEstado($data['estado']);
+                if ($oldEstado != $data['estado']) {
+                    $cambios[] = "estado ('$oldEstado' -> '{$data['estado']}')";
+                }
+            }
 
             if ($dao->update($pedido)) {
+                
+                // coger id del admin
+                $adminId = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
+                // si hay admin guardamos el log
+                if ($adminId) {
+                    $accion = "Actualizo pedido #" . $pedido->getId_pedido();
+                    if (!empty($cambios)) {
+                        $accion .= ". Campos: " . implode(", ", $cambios);
+                    }
+                    $logDao->insert($adminId, $accion);
+                }
+
                 echo json_encode(['message' => 'Order updated']);
             } else {
                 http_response_code(500);
@@ -65,6 +92,14 @@ class APIPedidoController
             }
 
             if ($id && $dao->delete($id)) {
+                
+                // coger id admin
+                $adminId = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
+                // guardar log de borrado
+                if ($adminId) {
+                    $logDao->insert($adminId, "Elimino pedido ID: " . $id);
+                }
+
                 echo json_encode(['message' => 'Order deleted']);
             } else {
                 http_response_code(500);

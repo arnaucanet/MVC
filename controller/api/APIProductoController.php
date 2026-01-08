@@ -1,5 +1,6 @@
 <?php
 include_once 'model/DAO/ProductoDAO.php';
+include_once 'model/DAO/LogDAO.php';
 include_once 'model/Producto.php';
 
 class APIProductoController
@@ -7,11 +8,18 @@ class APIProductoController
 
     public function index()
     {
+        // iniciar sesion para logs
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
+        $adminId = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
+
         error_reporting(0);
         ini_set('display_errors', 0);
 
         $method = $_SERVER['REQUEST_METHOD'];
         $dao = new ProductoDAO();
+        $logDao = new LogDAO();
 
         header('Content-Type: application/json');
 
@@ -51,6 +59,10 @@ class APIProductoController
 
             $id = $dao->create($product);
             if ($id) {
+                // guardar log si es admin
+                if ($adminId) {
+                    $logDao->insert($adminId, "Creo un nuevo producto: " . $product->getNombre());
+                }
                 http_response_code(201);
                 echo json_encode(['id' => $id, 'message' => 'Product created']);
             } else {
@@ -85,6 +97,10 @@ class APIProductoController
             $product->setId_categoria($data['id_categoria'] ?? $productData['id_categoria']);
 
             if ($dao->update($product)) {
+                // guardar log de actualizacion
+                if ($adminId) {
+                    $logDao->insert($adminId, "Actualizo producto ID: " . $product->getId_producto());
+                }
                 echo json_encode(['message' => 'Product updated']);
             } else {
                 http_response_code(500);
@@ -99,6 +115,10 @@ class APIProductoController
             }
 
             if ($id && $dao->delete($id)) {
+                // guardar log de borrado
+                if ($adminId) {
+                    $logDao->insert($adminId, "Elimino producto ID: " . $id);
+                }
                 echo json_encode(['message' => 'Product deleted']);
             } else {
                 http_response_code(500);

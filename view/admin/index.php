@@ -182,10 +182,29 @@
         <!-- offers -->
         <div id="offers-section" class="section">
             <div class="header-bar">
-                <h1>Ofertas</h1>
+                <h1>Gestión de Ofertas</h1>
+                <button class="btn btn-primary" onclick="openOfferModal()">+ Nueva Oferta</button>
             </div>
             <div class="card">
-                <p>...</p>
+                <div class="table-container">
+                    <table id="offers-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Código</th>
+                                <th>Descripción</th>
+                                <th>Descuento (%)</th>
+                                <th>Inicio</th>
+                                <th>Fin</th>
+                                <th>Activa</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- carga de datos con js -->
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
 
@@ -334,9 +353,58 @@
         </div>
     </div>
 
+    <!-- modal ofertas -->
+    <div id="offer-modal" class="modal">
+        <div class="modal-content">
+            <h3 id="modal-title-offer" style="margin-top:0; margin-bottom: 20px; font-size: 20px;">Oferta</h3>
+            <form id="offer-form">
+                <input type="hidden" id="offer-id">
+
+                <div class="form-group">
+                    <label>Código</label>
+                    <input type="text" id="offer-codigo" required placeholder="Código">
+                </div>
+
+                <div class="form-group">
+                    <label>Descripción</label>
+                    <textarea id="offer-descripcion"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>Descuento (%)</label>
+                    <input type="number" id="offer-descuento" min="0" max="100" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Fecha Inicio</label>
+                    <input type="date" id="offer-inicio" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Fecha Fin</label>
+                    <input type="date" id="offer-fin" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Activa</label>
+                    <select id="offer-activa">
+                        <option value="1">Sí</option>
+                        <option value="0">No</option>
+                    </select>
+                </div>
+
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-cancel" onclick="closeOfferModal()">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <script src="public/js/admin_users.js"></script>
     <script src="public/js/admin_products.js"></script>
     <script src="public/js/admin_orders.js"></script>
+    <script src="public/js/admin_offers.js"></script>
     <script src="public/js/admin_logs.js"></script>
     <script>
         //poder cambiar de seccion

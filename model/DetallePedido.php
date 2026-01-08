@@ -1,6 +1,7 @@
 <?php
 
-class DetallePedido{
+class DetallePedido
+{
     private $id_detalle;
     private $id_pedido;
     private $id_producto;
@@ -10,7 +11,7 @@ class DetallePedido{
 
     /**
      * Get the value of id_detalle
-     */ 
+     */
     public function getId_detalle()
     {
         return $this->id_detalle;
@@ -20,7 +21,7 @@ class DetallePedido{
      * Set the value of id_detalle
      *
      * @return  self
-     */ 
+     */
     public function setId_detalle($id_detalle)
     {
         $this->id_detalle = $id_detalle;
@@ -30,7 +31,7 @@ class DetallePedido{
 
     /**
      * Get the value of id_pedido
-     */ 
+     */
     public function getId_pedido()
     {
         return $this->id_pedido;
@@ -40,7 +41,7 @@ class DetallePedido{
      * Set the value of id_pedido
      *
      * @return  self
-     */ 
+     */
     public function setId_pedido($id_pedido)
     {
         $this->id_pedido = $id_pedido;
@@ -50,7 +51,7 @@ class DetallePedido{
 
     /**
      * Get the value of id_producto
-     */ 
+     */
     public function getId_producto()
     {
         return $this->id_producto;
@@ -60,7 +61,7 @@ class DetallePedido{
      * Set the value of id_producto
      *
      * @return  self
-     */ 
+     */
     public function setId_producto($id_producto)
     {
         $this->id_producto = $id_producto;
@@ -70,7 +71,7 @@ class DetallePedido{
 
     /**
      * Get the value of cantidad
-     */ 
+     */
     public function getCantidad()
     {
         return $this->cantidad;
@@ -80,7 +81,7 @@ class DetallePedido{
      * Set the value of cantidad
      *
      * @return  self
-     */ 
+     */
     public function setCantidad($cantidad)
     {
         $this->cantidad = $cantidad;
@@ -90,7 +91,7 @@ class DetallePedido{
 
     /**
      * Get the value of precio_unitario
-     */ 
+     */
     public function getPrecio_unitario()
     {
         return $this->precio_unitario;
@@ -100,7 +101,7 @@ class DetallePedido{
      * Set the value of precio_unitario
      *
      * @return  self
-     */ 
+     */
     public function setPrecio_unitario($precio_unitario)
     {
         $this->precio_unitario = $precio_unitario;
@@ -110,7 +111,7 @@ class DetallePedido{
 
     /**
      * Get the value of subtotal
-     */ 
+     */
     public function getSubtotal()
     {
         return $this->subtotal;
@@ -120,7 +121,7 @@ class DetallePedido{
      * Set the value of subtotal
      *
      * @return  self
-     */ 
+     */
     public function setSubtotal($subtotal)
     {
         $this->subtotal = $subtotal;

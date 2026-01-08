@@ -1,8 +1,10 @@
 <?php
-class DataBase {
+class DataBase
+{
     private static $connection = null;
 
-    public static function connect($host = 'localhost', $user = 'root', $pass = '', $db = 'netflixeats') {
+    public static function connect($host = 'localhost', $user = 'root', $pass = '', $db = 'netflixeats')
+    {
         if (self::$connection === null) {
             self::$connection = new mysqli($host, $user, $pass, $db);
 
@@ -13,7 +15,8 @@ class DataBase {
         return self::$connection;
     }
 
-    public static function close() {
+    public static function close()
+    {
         if (self::$connection !== null) {
             self::$connection->close();
             self::$connection = null;

@@ -1,6 +1,7 @@
 <?php
 
-class Oferta{
+class Oferta
+{
     private $id_oferta;
     private $codigo;
     private $descripcion;
@@ -11,7 +12,7 @@ class Oferta{
 
     /**
      * Get the value of id_oferta
-     */ 
+     */
     public function getId_oferta()
     {
         return $this->id_oferta;
@@ -21,7 +22,7 @@ class Oferta{
      * Set the value of id_oferta
      *
      * @return  self
-     */ 
+     */
     public function setId_oferta($id_oferta)
     {
         $this->id_oferta = $id_oferta;
@@ -31,7 +32,7 @@ class Oferta{
 
     /**
      * Get the value of codigo
-     */ 
+     */
     public function getCodigo()
     {
         return $this->codigo;
@@ -41,7 +42,7 @@ class Oferta{
      * Set the value of codigo
      *
      * @return  self
-     */ 
+     */
     public function setCodigo($codigo)
     {
         $this->codigo = $codigo;
@@ -51,7 +52,7 @@ class Oferta{
 
     /**
      * Get the value of descripcion
-     */ 
+     */
     public function getDescripcion()
     {
         return $this->descripcion;
@@ -61,7 +62,7 @@ class Oferta{
      * Set the value of descripcion
      *
      * @return  self
-     */ 
+     */
     public function setDescripcion($descripcion)
     {
         $this->descripcion = $descripcion;
@@ -71,7 +72,7 @@ class Oferta{
 
     /**
      * Get the value of descuento_porcentaje
-     */ 
+     */
     public function getDescuento_porcentaje()
     {
         return $this->descuento_porcentaje;
@@ -81,7 +82,7 @@ class Oferta{
      * Set the value of descuento_porcentaje
      *
      * @return  self
-     */ 
+     */
     public function setDescuento_porcentaje($descuento_porcentaje)
     {
         $this->descuento_porcentaje = $descuento_porcentaje;
@@ -91,7 +92,7 @@ class Oferta{
 
     /**
      * Get the value of fecha_inicio
-     */ 
+     */
     public function getFecha_inicio()
     {
         return $this->fecha_inicio;
@@ -101,7 +102,7 @@ class Oferta{
      * Set the value of fecha_inicio
      *
      * @return  self
-     */ 
+     */
     public function setFecha_inicio($fecha_inicio)
     {
         $this->fecha_inicio = $fecha_inicio;
@@ -111,7 +112,7 @@ class Oferta{
 
     /**
      * Get the value of fecha_fin
-     */ 
+     */
     public function getFecha_fin()
     {
         return $this->fecha_fin;
@@ -121,7 +122,7 @@ class Oferta{
      * Set the value of fecha_fin
      *
      * @return  self
-     */ 
+     */
     public function setFecha_fin($fecha_fin)
     {
         $this->fecha_fin = $fecha_fin;
@@ -131,7 +132,7 @@ class Oferta{
 
     /**
      * Get the value of activa
-     */ 
+     */
     public function getActiva()
     {
         return $this->activa;
@@ -141,7 +142,7 @@ class Oferta{
      * Set the value of activa
      *
      * @return  self
-     */ 
+     */
     public function setActiva($activa)
     {
         $this->activa = $activa;

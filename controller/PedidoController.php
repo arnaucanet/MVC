@@ -7,13 +7,15 @@ include_once 'model/DAO/DetallePedidoDAO.php';
 include_once 'model/DAO/UsuarioDAO.php';
 include_once 'model/DAO/OfertaDAO.php';
 
-class PedidoController {
-    
-    public function checkout() {
+class PedidoController
+{
+
+    public function checkout()
+    {
         if (session_status() == PHP_SESSION_NONE) {
             session_start();
         }
-        
+
         // si llegan datos los actualizamos
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['cart_data'])) {
             $datosEnBruto = $_POST['cart_data'];
@@ -31,7 +33,8 @@ class PedidoController {
         }
     }
 
-    public function confirm() {
+    public function confirm()
+    {
         if (session_status() == PHP_SESSION_NONE) {
             session_start();
         }
@@ -42,7 +45,7 @@ class PedidoController {
             header("Location: index.php?controller=Usuario&action=login");
             exit();
         }
-        
+
         $userId = $_SESSION['user_id'];
 
         // verificar carrito en sesion
@@ -52,7 +55,7 @@ class PedidoController {
         }
 
         $carrito = $_SESSION['checkout_cart'];
-        
+
         // guardar datos
         $nombre = $_POST['nombre'];
         $apellidos = $_POST['apellidos'];
@@ -60,7 +63,7 @@ class PedidoController {
         $cp = $_POST['cp'];
         $ciudad = $_POST['ciudad'];
         $telefono = $_POST['telefono'];
-        
+
         $nombreCompleto = trim($nombre . ' ' . $apellidos);
 
 
@@ -75,11 +78,11 @@ class PedidoController {
         if (isset($_SESSION['oferta_aplicada'])) {
             $id_oferta = $_SESSION['oferta_aplicada']['id'];
             $descuentoPorc = $_SESSION['oferta_aplicada']['descuento'];
-            
+
             // aplicar el descuento
             $descuento = $total * ($descuentoPorc / 100);
             $total = $total - $descuento;
-            
+
             // borrar descuento de sesion
             unset($_SESSION['oferta_aplicada']);
         }
@@ -92,14 +95,14 @@ class PedidoController {
         $pedido->setEstado('pendiente');
         $pedido->setTotal($total);
         $pedido->setMoneda('EUR');
-        
+
         // establecer datos de envio
         $pedido->setNombre_destinatario($nombreCompleto);
         $pedido->setDireccion_envio($direccion);
         $pedido->setCp($cp);
         $pedido->setCiudad($ciudad);
         $pedido->setTelefono_contacto($telefono);
-        
+
         $pedidoDAO = new PedidoDAO();
         // insertar primero el pedido
         $pedidoId = $pedidoDAO->create($pedido);
@@ -107,7 +110,7 @@ class PedidoController {
         if ($pedidoId) {
             // crear detalle_pedido en base al id del pedido
             $detalleDAO = new DetallePedidoDAO();
-            
+
             foreach ($carrito as $item) {
                 $detalle = new DetallePedido();
                 $detalle->setId_pedido($pedidoId);
@@ -115,13 +118,13 @@ class PedidoController {
                 $detalle->setCantidad($item['cantidad']);
                 $detalle->setPrecio_unitario($item['price']);
                 $detalle->setSubtotal($item['price'] * $item['cantidad']);
-                
+
                 $detalleDAO->create($detalle);
             }
-            
+
             // limpiar carrito
             unset($_SESSION['checkout_cart']);
-            
+
             // mostrar confirmacion de pedido
             include 'view/pedido/confirm.php';
         } else {
@@ -130,7 +133,8 @@ class PedidoController {
         }
     }
 
-    public function mis_pedidos() {
+    public function mis_pedidos()
+    {
         if (session_status() == PHP_SESSION_NONE) {
             session_start();
         }
@@ -147,7 +151,8 @@ class PedidoController {
         include 'view/pedido/mis_pedidos.php';
     }
 
-    public function detalle() {
+    public function detalle()
+    {
         if (session_status() == PHP_SESSION_NONE) {
             session_start();
         }
@@ -158,9 +163,9 @@ class PedidoController {
         }
 
         $id_pedido = isset($_GET['id']) ? (int)$_GET['id'] : 0;
-        if($id_pedido <= 0){
-             header("Location: index.php?controller=Pedido&action=mis_pedidos");
-             exit();
+        if ($id_pedido <= 0) {
+            header("Location: index.php?controller=Pedido&action=mis_pedidos");
+            exit();
         }
 
         $userId = $_SESSION['user_id'];
@@ -168,9 +173,9 @@ class PedidoController {
         $pedido = $pedidoDAO->getPedidoById($id_pedido);
 
         // comprobar que el pedido existe y es del usuario
-        if(!$pedido || $pedido->getId_usuario() != $userId){
-             header("Location: index.php?controller=Pedido&action=mis_pedidos");
-             exit();
+        if (!$pedido || $pedido->getId_usuario() != $userId) {
+            header("Location: index.php?controller=Pedido&action=mis_pedidos");
+            exit();
         }
 
         $detalleDAO = new DetallePedidoDAO();
@@ -186,7 +191,8 @@ class PedidoController {
         include 'view/pedido/detalle.php';
     }
 
-    public function aplicarDescuento() {
+    public function aplicarDescuento()
+    {
         if (session_status() == PHP_SESSION_NONE) {
             session_start();
         }
@@ -195,7 +201,7 @@ class PedidoController {
             $codigo = $_POST['codigo'];
             $ofertaDAO = new OfertaDAO();
             $oferta = $ofertaDAO->getOfertaByCodigo($codigo);
-            
+
             if ($oferta) {
                 $_SESSION['oferta_aplicada'] = [
                     'id' => $oferta->getId_oferta(),
@@ -208,7 +214,7 @@ class PedidoController {
                 unset($_SESSION['oferta_aplicada']);
             }
         }
-        
+
         header('Location: index.php?controller=Pedido&action=checkout');
         exit();
     }

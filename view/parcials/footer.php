@@ -7,13 +7,16 @@
             padding: 40px 0 20px;
             font-size: 0.9rem;
         }
+
         .netflixeats-footer a {
             color: #777;
             text-decoration: none;
         }
+
         .netflixeats-footer a:hover {
             text-decoration: underline;
         }
+
         .netflixeats-footer .footer-links {
             max-width: 900px;
             margin: auto;
@@ -22,6 +25,7 @@
             gap: 18px;
             padding-bottom: 25px;
         }
+
         .netflixeats-footer .footer-bottom {
             text-align: center;
             color: #666;
@@ -50,4 +54,5 @@
 <script src="/MVC/public/js/main.js"></script>
 <script src="/MVC/public/js/cart.js"></script>
 </body>
+
 </html>

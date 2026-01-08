@@ -1,7 +1,7 @@
 <?php include 'view/parcials/header.php'; ?>
 
 <div class="container" style="padding-top: 100px; padding-bottom: 50px;">
-    
+
     <div class="mb-4">
         <a href="index.php?controller=Pedido&action=mis_pedidos" class="text-decoration-none text-white d-inline-flex align-items-center">
             <img src="public/icons/arrow-left-white.svg" alt="Back" width="20" height="20" class="me-2">
@@ -14,13 +14,13 @@
             <div class="card bg-dark border-secondary mb-4">
                 <div class="card-header border-secondary d-flex justify-content-between align-items-center">
                     <h4 class="mb-0 text-white">Pedido #<?= $pedido->getId_pedido() ?></h4>
-                    <?php 
-                        $estado = $pedido->getEstado();
-                        $clase = 'bg-secondary';
-                        if($estado === 'entregado') $clase = 'bg-success';
-                        elseif($estado === 'en proceso') $clase = 'bg-primary';
-                        elseif($estado === 'pendiente') $clase = 'bg-warning text-dark';
-                        elseif($estado === 'cancelado') $clase = 'bg-danger';
+                    <?php
+                    $estado = $pedido->getEstado();
+                    $clase = 'bg-secondary';
+                    if ($estado === 'entregado') $clase = 'bg-success';
+                    elseif ($estado === 'en proceso') $clase = 'bg-primary';
+                    elseif ($estado === 'pendiente') $clase = 'bg-warning text-dark';
+                    elseif ($estado === 'cancelado') $clase = 'bg-danger';
                     ?>
                     <span class="badge <?= $clase ?>"><?= $estado ?></span>
                 </div>
@@ -37,21 +37,21 @@
                             </thead>
                             <tbody>
                                 <?php foreach ($detalles as $detalle): ?>
-                                <tr>
-                                    <td>
-                                        <div class="d-flex align-items-center">
-                                            <?php if(!empty($detalle['imagen'])): ?>
-                                                <img src="<?= $detalle['imagen'] ?>" alt="<?= $detalle['nombre_producto'] ?>" class="rounded me-3" style="width: 60px; height: 60px; object-fit: cover;">
-                                            <?php endif; ?>
-                                            <div>
-                                                <div class="fw-bold"><?= $detalle['nombre_producto'] ?></div>
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <?php if (!empty($detalle['imagen'])): ?>
+                                                    <img src="<?= $detalle['imagen'] ?>" alt="<?= $detalle['nombre_producto'] ?>" class="rounded me-3" style="width: 60px; height: 60px; object-fit: cover;">
+                                                <?php endif; ?>
+                                                <div>
+                                                    <div class="fw-bold"><?= $detalle['nombre_producto'] ?></div>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </td>
-                                    <td class="text-center">x<?= $detalle['cantidad'] ?></td>
-                                    <td class="text-end"><?= $detalle['precio_unitario'] ?> €</td>
-                                    <td class="text-end"><?= $detalle['subtotal'] ?> €</td>
-                                </tr>
+                                        </td>
+                                        <td class="text-center">x<?= $detalle['cantidad'] ?></td>
+                                        <td class="text-end"><?= $detalle['precio_unitario'] ?> €</td>
+                                        <td class="text-end"><?= $detalle['subtotal'] ?> €</td>
+                                    </tr>
                                 <?php endforeach; ?>
                             </tbody>
                         </table>
@@ -66,21 +66,21 @@
                     <h5 class="mb-0 text-white">Resumen</h5>
                 </div>
                 <div class="card-body">
-                    <?php 
-                        $subtotal_real = 0;
-                        foreach($detalles as $d) {
-                            $subtotal_real += $d['subtotal'];
-                        }
+                    <?php
+                    $subtotal_real = 0;
+                    foreach ($detalles as $d) {
+                        $subtotal_real += $d['subtotal'];
+                    }
                     ?>
                     <div class="d-flex justify-content-between mb-2 text-white-50">
                         <span>Subtotal</span>
                         <span><?= number_format($subtotal_real, 2) ?> €</span>
                     </div>
-                    <?php if(isset($oferta) && $oferta): ?>
-                    <div class="d-flex justify-content-between mb-2 text-success">
-                        <span>Descuento (<?= $oferta->getCodigo() ?>)</span>
-                        <span>-<?= number_format($subtotal_real - $pedido->getTotal(), 2) ?> €</span>
-                    </div>
+                    <?php if (isset($oferta) && $oferta): ?>
+                        <div class="d-flex justify-content-between mb-2 text-success">
+                            <span>Descuento (<?= $oferta->getCodigo() ?>)</span>
+                            <span>-<?= number_format($subtotal_real - $pedido->getTotal(), 2) ?> €</span>
+                        </div>
                     <?php endif; ?>
                     <div class="d-flex justify-content-between mb-2 text-white-50">
                         <span>Envío</span>
@@ -102,7 +102,7 @@
                     <p class="mb-1 fw-bold text-white"><?= $pedido->getNombre_destinatario() ?></p>
                     <p class="mb-1"><?= $pedido->getDireccion_envio() ?></p>
                     <p class="mb-1"><?= $pedido->getCp() ?>, <?= $pedido->getCiudad() ?></p>
-                    <?php if($pedido->getTelefono_contacto()): ?>
+                    <?php if ($pedido->getTelefono_contacto()): ?>
                         <p class="mb-0 mt-2"><small>Tel: <?= $pedido->getTelefono_contacto() ?></small></p>
                     <?php endif; ?>
                     <p class="mb-0 mt-3"><small>Fecha: <?= date('d/m/Y H:i', strtotime($pedido->getFecha_pedido())) ?></small></p>

@@ -27,7 +27,7 @@
         </div>
     </div>
 
-    <div class="mt-5 p-4 text-white rounded text-center"  style="background-color: #e50914">
+    <div class="mt-5 p-4 text-white rounded text-center" style="background-color: #e50914">
         <h3>¿Necesitas ayuda urgente?</h3>
         <p>Llámanos al 900 123 456.</p>
     </div>

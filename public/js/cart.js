@@ -1,16 +1,16 @@
 const Carrito = {
     claveLocalStorage: 'mi_carrito_netflix',
-    
+
     productos: [],
 
     iniciar() {
         const datosGuardados = localStorage.getItem(this.claveLocalStorage);
-        
+
         if (datosGuardados) {
             // texto a array
             this.productos = JSON.parse(datosGuardados);
         }
-        
+
         // actualizar vistas
         this.actualizarVista();
         this.actualizarContador();
@@ -25,9 +25,9 @@ const Carrito = {
             productoExistente.cantidad += parseInt(cantidad);
         } else {
             // añadir
-            this.productos.push({ 
-                ...productoNuevo, 
-                cantidad: parseInt(cantidad) 
+            this.productos.push({
+                ...productoNuevo,
+                cantidad: parseInt(cantidad)
             });
         }
 
@@ -35,15 +35,15 @@ const Carrito = {
         this.guardarEnLocalStorage();
         this.actualizarVista();
         this.actualizarContador();
-        
+
         const desplegable = document.getElementById('cartDropdown');
-        if(desplegable) desplegable.classList.add('show');
+        if (desplegable) desplegable.classList.add('show');
     },
 
     eliminarProducto(idProducto) {
         // filtrar carrito sin el eliminado
         this.productos = this.productos.filter(item => item.id != idProducto);
-        
+
         this.guardarEnLocalStorage();
         this.actualizarVista();
         this.actualizarContador();
@@ -51,10 +51,10 @@ const Carrito = {
 
     cambiarCantidad(idProducto, cambio) {
         const producto = this.productos.find(item => item.id == idProducto);
-        
+
         if (producto) {
             producto.cantidad += cambio;
-        
+
             if (producto.cantidad <= 0) {
                 this.eliminarProducto(idProducto);
             } else {
@@ -73,7 +73,7 @@ const Carrito = {
     actualizarContador() {
         // sumar cantidades productos
         let totalProductos = 0;
-        for(let item of this.productos) {
+        for (let item of this.productos) {
             totalProductos += item.cantidad;
         }
 
@@ -92,21 +92,21 @@ const Carrito = {
         const contenedorItems = document.getElementById('cartItems');
         const elementoTotal = document.getElementById('cartTotal');
         const botonPagar = document.getElementById('checkoutBtn');
-        
+
         if (!contenedorItems || !elementoTotal) return;
 
         if (this.productos.length === 0) {
             contenedorItems.innerHTML = '<div class="text-center text-white">Tu carrito está vacío</div>';
             elementoTotal.innerText = '0.00 €';
-            if(botonPagar) {
+            if (botonPagar) {
                 botonPagar.disabled = true;
                 botonPagar.classList.add('disabled');
             }
             return;
         }
-        
+
         // si hay productos, activamos el boton
-        if(botonPagar) {
+        if (botonPagar) {
             botonPagar.disabled = false;
             botonPagar.classList.remove('disabled');
         }
@@ -147,19 +147,19 @@ const Carrito = {
         contenedorItems.innerHTML = html;
         elementoTotal.innerText = precioTotal.toFixed(2) + ' €';
     },
-    
+
     tramitarPedido() {
         if (this.productos.length === 0) return;
-        
+
         const formulario = document.createElement('form');
         formulario.method = 'POST';
         formulario.action = 'index.php?controller=Pedido&action=checkout';
-        
+
         const inputDatos = document.createElement('input');
         inputDatos.type = 'hidden';
         inputDatos.name = 'cart_data';
         inputDatos.value = JSON.stringify(this.productos);
-        
+
         formulario.appendChild(inputDatos);
         document.body.appendChild(formulario);
         formulario.submit();
@@ -196,8 +196,8 @@ document.addEventListener('DOMContentLoaded', () => {
             desplegable.classList.remove('show');
         });
     }
-    
-    if(botonPagar) {
+
+    if (botonPagar) {
         botonPagar.addEventListener('click', () => {
             Carrito.tramitarPedido();
         });
@@ -206,10 +206,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // funcion global para añadir al carrito
 function addToCartJS(id, nombre, precio, imagen, cantidad = 1) {
-    Carrito.anadirProducto({ 
-        id: id, 
-        name: nombre, 
-        price: precio, 
-        image: imagen 
+    Carrito.anadirProducto({
+        id: id,
+        name: nombre,
+        price: precio,
+        image: imagen
     }, cantidad);
 }

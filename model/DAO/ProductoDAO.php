@@ -116,9 +116,10 @@ class ProductoDAO
         return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function create(Producto $p){
+    public function create(Producto $p)
+    {
         $stmt = $this->db->prepare("INSERT INTO producto (nombre, descripcion, precio, imagen, stock, activo, id_categoria) VALUES (?, ?, ?, ?, ?, ?, ?)");
-        if(!$stmt) return false;
+        if (!$stmt) return false;
         $nombre = $p->getNombre();
         $descripcion = $p->getDescripcion();
         $precio = $p->getPrecio();
@@ -130,13 +131,14 @@ class ProductoDAO
         // nombre(s), descripcion(s), precio(d), imagen(s), stock(i), activo(i), categoriaId(i)
         $stmt->bind_param('ssdsiii', $nombre, $descripcion, $precio, $imagen, $stock, $activo, $categoriaId);
         $ok = $stmt->execute();
-        if($ok) return $this->db->insert_id;
+        if ($ok) return $this->db->insert_id;
         return false;
     }
 
-    public function update(Producto $p){
+    public function update(Producto $p)
+    {
         $stmt = $this->db->prepare("UPDATE producto SET nombre=?, descripcion=?, precio=?, imagen=?, stock=?, activo=?, id_categoria=? WHERE id_producto=?");
-        if(!$stmt) return false;
+        if (!$stmt) return false;
         $nombre = $p->getNombre();
         $descripcion = $p->getDescripcion();
         $precio = $p->getPrecio();
@@ -145,15 +147,16 @@ class ProductoDAO
         $activo = $p->getActivo() ?: 0;
         $categoriaId = $p->getId_categoria();
         $productoId = $p->getId_producto();
-        
+
         // nombre(s), descripcion(s), precio(d), imagen(s), stock(i), activo(i), categoriaId(i), productoId(i)
         $stmt->bind_param('ssdsiiii', $nombre, $descripcion, $precio, $imagen, $stock, $activo, $categoriaId, $productoId);
         return $stmt->execute();
     }
 
-    public function delete($id){
+    public function delete($id)
+    {
         $stmt = $this->db->prepare("DELETE FROM producto WHERE id_producto = ?");
-        if(!$stmt) return false;
+        if (!$stmt) return false;
         $stmt->bind_param('i', $id);
         return $stmt->execute();
     }

@@ -2,14 +2,17 @@
 require_once 'database/database.php';
 require_once 'model/DAO/ProductoDAO.php';
 
-class HomeController {
+class HomeController
+{
     private $db;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->db = DataBase::connect();
     }
 
-    public function index() {
+    public function index()
+    {
         $productoDAO = new ProductoDAO();
 
         $producto_destacado      = $productoDAO->getProductoDestacado();

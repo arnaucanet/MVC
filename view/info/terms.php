@@ -1,7 +1,7 @@
 <?php include 'view/parcials/header.php'; ?>
 <div class="container" style="padding-top:100px; padding-bottom: 50px; color: #fff;">
     <h1 class="mb-4">Términos de Uso</h1>
-    
+
     <div class="text-white-50" style="line-height: 1.8;">
         <p>Bienvenido a NetflixEats. Al utilizar nuestro sitio web y servicios, usted acepta cumplir con los siguientes términos y condiciones.</p>
 

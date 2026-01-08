@@ -31,16 +31,16 @@
                             <td>#<?= $pedido->getId_pedido() ?></td>
                             <td><?= date('d/m/Y H:i', strtotime($pedido->getFecha_pedido())) ?></td>
                             <td>
-                                <?php 
-                                    $estado = $pedido->getEstado();
-                                    
-                                    $clase = 'badge-secondary';
-                                    if($estado === 'entregado') $clase = 'badge-success';
-                                    elseif($estado === 'en preparación') $clase = 'badge-primary';
-                                    elseif($estado === 'en proceso') $clase = 'badge-primary';
-                                    elseif($estado === 'enviado') $clase = 'badge-primary';
-                                    elseif($estado === 'pendiente') $clase = 'badge-warning';
-                                    elseif($estado === 'cancelado') $clase = 'badge-danger';
+                                <?php
+                                $estado = $pedido->getEstado();
+
+                                $clase = 'badge-secondary';
+                                if ($estado === 'entregado') $clase = 'badge-success';
+                                elseif ($estado === 'en preparación') $clase = 'badge-primary';
+                                elseif ($estado === 'en proceso') $clase = 'badge-primary';
+                                elseif ($estado === 'enviado') $clase = 'badge-primary';
+                                elseif ($estado === 'pendiente') $clase = 'badge-warning';
+                                elseif ($estado === 'cancelado') $clase = 'badge-danger';
                                 ?>
                                 <span class="badge <?= $clase ?>"><?= htmlspecialchars($estado) ?></span>
                             </td>

@@ -7,7 +7,7 @@
         </div>
         <h2 class="mb-3">¡Pedido realizado con éxito!</h2>
         <p class="text-muted mb-4">Gracias por tu compra. Hemos recibido tu pedido correctamente.</p>
-        
+
         <a href="index.php" id="checkoutBtn" class="btn btn-red btn-lg">Volver al inicio</a>
     </div>
 </div>

@@ -69,11 +69,11 @@ function editOrder(id) {
 function openOrderModal(order) {
     const modal = document.getElementById('order-modal');
     const title = document.getElementById('modal-title-order');
-    
+
     if (title) title.textContent = 'Editar Estado del Pedido #' + order.id_pedido;
-    
+
     document.getElementById('order-id').value = order.id_pedido;
-    
+
     // asignar estado
     const select = document.getElementById('order-estado');
     select.value = order.estado;

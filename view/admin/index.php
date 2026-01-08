@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <title>Panel de Administración - Netflix Eats</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="public/css/admin.css">
 </head>
+
 <body>
 
     <div class="sidebar">
@@ -39,7 +41,7 @@
                 <h1>Gestión de Usuarios</h1>
                 <button class="btn btn-primary" onclick="openUserModal()">+ Nuevo Usuario</button>
             </div>
-            
+
             <div class="card">
                 <div class="table-container">
                     <table id="users-table">
@@ -60,13 +62,13 @@
             </div>
         </div>
 
-       <!-- products -->
+        <!-- products -->
         <div id="products-section" class="section">
             <div class="header-bar">
                 <h1>Gestión de Productos</h1>
                 <button class="btn btn-primary" onclick="openProductModal()">+ Nuevo Producto</button>
             </div>
-            
+
             <div class="card">
                 <div class="table-container">
                     <table id="products-table">
@@ -96,7 +98,7 @@
             <div class="header-bar">
                 <h1>Gestión de Pedidos</h1>
             </div>
-            
+
             <div class="card">
                 <div class="table-container">
                     <table id="orders-table">
@@ -121,14 +123,22 @@
 
         <!-- offers -->
         <div id="offers-section" class="section">
-            <div class="header-bar"><h1>Ofertas</h1></div>
-            <div class="card"><p>...</p></div>
+            <div class="header-bar">
+                <h1>Ofertas</h1>
+            </div>
+            <div class="card">
+                <p>...</p>
+            </div>
         </div>
 
         <!-- logs -->
         <div id="logs-section" class="section">
-            <div class="header-bar"><h1>Logs</h1></div>
-            <div class="card"><p>...</p></div>
+            <div class="header-bar">
+                <h1>Logs</h1>
+            </div>
+            <div class="card">
+                <p>...</p>
+            </div>
         </div>
     </div>
 
@@ -138,23 +148,23 @@
             <h3 id="modal-title" style="margin-top:0; margin-bottom: 20px; font-size: 20px;">Usuario</h3>
             <form id="user-form">
                 <input type="hidden" id="user-id">
-                
+
                 <div class="form-group">
                     <label>Nombre Completo</label>
                     <input type="text" id="user-nombre" required placeholder="Ej: David Herrra">
                 </div>
-                
+
                 <div class="form-group">
                     <label>Correo Electrónico</label>
                     <input type="email" id="user-email" required placeholder="ejemplo@gmail.com">
                 </div>
-                
+
                 <div class="form-group">
                     <label>Contraseña</label>
                     <input type="password" id="user-password" placeholder="••••••••">
                     <small style="color: #6b7280; font-size: 12px;">Nueva contraseña</small>
                 </div>
-                
+
                 <div class="form-group">
                     <label>Rol de Usuario</label>
                     <select id="user-rol">
@@ -177,12 +187,12 @@
             <h3 id="modal-title-product" style="margin-top:0; margin-bottom: 20px; font-size: 20px;">Producto</h3>
             <form id="product-form">
                 <input type="hidden" id="product-id">
-                
+
                 <div class="form-group">
                     <label>Nombre</label>
                     <input type="text" id="product-nombre" required>
                 </div>
-                
+
                 <div class="form-group">
                     <label>Descripción</label>
                     <textarea id="product-descripcion" required></textarea>
@@ -231,7 +241,7 @@
             <h3 id="modal-title-order" style="margin-top:0; margin-bottom: 20px; font-size: 20px;">Editar Pedido</h3>
             <form id="order-form">
                 <input type="hidden" id="order-id">
-                
+
                 <div class="form-group">
                     <label>Estado del Pedido</label>
                     <select id="order-estado">
@@ -260,11 +270,12 @@
             // quitar no seleccioandas
             document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
             document.querySelectorAll('.sidebar nav a').forEach(a => a.classList.remove('active'));
-            
+
             // seccion seleccionada
             document.getElementById(id + '-section').classList.add('active');
             document.getElementById('nav-' + id).classList.add('active');
         }
     </script>
 </body>
+
 </html>

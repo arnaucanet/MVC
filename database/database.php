@@ -11,6 +11,7 @@ class DataBase
             if (self::$connection->connect_error) {
                 die('Error al conectar a la base de datos: ' . self::$connection->connect_error);
             }
+            self::$connection->set_charset("utf8");
         }
         return self::$connection;
     }

@@ -99,6 +99,64 @@
                 <h1>Gestión de Pedidos</h1>
             </div>
 
+            <!-- control de filtros -->
+            <div class="card" style="margin-bottom: 20px; padding: 15px;">
+                <div style="display: flex; flex-wrap: wrap; gap: 15px; align-items: flex-end;">
+                    <!-- filtros -->
+                    <div>
+                        <label style="font-size: 12px; display:block; margin-bottom:4px;">Usuario ID</label>
+                        <input type="number" id="filter-user-id" placeholder="ID" style="padding: 5px; width: 80px; border: 1px solid #ccc; border-radius: 4px;">
+                    </div>
+                    <div>
+                        <label style="font-size: 12px; display:block; margin-bottom:4px;">Desde Fecha</label>
+                        <input type="date" id="filter-date-start" style="padding: 5px; border: 1px solid #ccc; border-radius: 4px;">
+                    </div>
+                    <div>
+                        <label style="font-size: 12px; display:block; margin-bottom:4px;">Hasta Fecha</label>
+                        <input type="date" id="filter-date-end" style="padding: 5px; border: 1px solid #ccc; border-radius: 4px;">
+                    </div>
+                    <div>
+                        <label style="font-size: 12px; display:block; margin-bottom:4px;">Precio</label>
+                        <div style="display: flex; gap: 5px;">
+                             <input type="number" id="filter-price-min" placeholder="Min" style="padding: 5px; width: 60px; border: 1px solid #ccc; border-radius: 4px;">
+                             <input type="number" id="filter-price-max" placeholder="Max" style="padding: 5px; width: 60px; border: 1px solid #ccc; border-radius: 4px;">
+                        </div>
+                    </div>
+                    
+                    <!-- clasificar -->
+                    <div>
+                        <label style="font-size: 12px; display:block; margin-bottom:4px;">Ordenar</label>
+                        <div style="display: flex; gap: 5px;">
+                            <select id="sort-by" style="padding: 6px; border: 1px solid #ccc; border-radius: 4px;">
+                                <option value="fecha_pedido">Fecha</option>
+                                <option value="total">Precio</option>
+                                <option value="id_usuario">Usuario</option>
+                            </select>
+                            <select id="sort-order" style="padding: 6px; border: 1px solid #ccc; border-radius: 4px;">
+                                <option value="desc">Desc</option>
+                                <option value="asc">Asc</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- moneda -->
+                    <div>
+                        <label style="font-size: 12px; display:block; margin-bottom:4px;">Moneda</label>
+                        <select id="currency-select" style="padding: 6px; border: 1px solid #ccc; border-radius: 4px;">
+                            <option value="EUR">EUR (€)</option>
+                            <option value="USD">USD ($)</option>
+                            <option value="GBP">GBP (£)</option>
+                            <option value="JPY">JPY (¥)</option>
+                        </select>
+                    </div>
+                    
+                    <div style="padding-bottom: 1px;">
+                         <button id="apply-filters" class="btn btn-primary" style="padding: 6px 12px;">Aplicar</button>
+                         <button id="clear-filters" class="btn btn-secondary" style="padding: 6px 12px; background: #666;">Limpiar</button>
+                    </div>
+                </div>
+            </div>
+
             <div class="card">
                 <div class="table-container">
                     <table id="orders-table">
@@ -134,10 +192,25 @@
         <!-- logs -->
         <div id="logs-section" class="section">
             <div class="header-bar">
-                <h1>Logs</h1>
+                <h1>Historial de Acciones (Logs)</h1>
             </div>
             <div class="card">
-                <p>...</p>
+                <div class="table-container">
+                    <table id="logs-table">
+                        <thead>
+                            <tr>
+                                <th>ID Log</th>
+                                <th>Acción</th>
+                                <th>Usuario ID</th>
+                                <th>Fecha</th>
+                                <th>IP</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- carga de datos con js -->
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
@@ -264,6 +337,7 @@
     <script src="public/js/admin_users.js"></script>
     <script src="public/js/admin_products.js"></script>
     <script src="public/js/admin_orders.js"></script>
+    <script src="public/js/admin_logs.js"></script>
     <script>
         //poder cambiar de seccion
         function showSection(id) {

@@ -237,3 +237,23 @@ async function handleOrderFormSubmit(e) {
         console.error('Error:', error);
     }
 }
+
+async function deleteOrder(id) {
+    if (!confirm('¿Estás seguro de eliminar este pedido?')) return;
+
+    try {
+        const response = await fetch(`${API_ORDER_URL}&id=${id}`, {
+            method: 'DELETE'
+        });
+
+        if (response.ok) {
+            fetchOrders();
+        } else {
+            const error = await response.json();
+            alert('Error: ' + (error.error || 'No se pudo eliminar'));
+        }
+    } catch (error) {
+        console.error('Error deleting order:', error);
+        alert('Error de conexión');
+    }
+}

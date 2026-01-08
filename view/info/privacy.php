@@ -1,7 +1,7 @@
 <?php include 'view/parcials/header.php'; ?>
 <div class="container" style="padding-top:100px; padding-bottom: 50px; color: #fff;">
     <h1 class="mb-4">Política de Privacidad</h1>
-    
+
     <div class="text-white-50" style="line-height: 1.8;">
         <p>Última actualización: 03 de Diciembre de 2025</p>
 

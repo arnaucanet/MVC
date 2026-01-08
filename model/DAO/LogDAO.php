@@ -3,14 +3,17 @@
 include_once 'database/database.php';
 include_once 'model/Log.php';
 
-class LogDAO {
+class LogDAO
+{
     private $db;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->db = DataBase::connect();
     }
 
-    public function getLogs() {
+    public function getLogs()
+    {
         $result = $this->db->query("SELECT * FROM log");
         return $result->fetch_all(MYSQLI_ASSOC);
     }

@@ -3,19 +3,23 @@
 include_once 'database/database.php';
 include_once 'model/Pedido.php';
 
-class PedidoDAO {
+class PedidoDAO
+{
     private $db;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->db = DataBase::connect();
     }
 
-    public function getPedidos() {
+    public function getPedidos()
+    {
         $result = $this->db->query("SELECT * FROM pedido");
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function create($pedido) {
+    public function create($pedido)
+    {
         $stmt = $this->db->prepare("INSERT INTO pedido (id_usuario, id_oferta, fecha_pedido, estado, total, moneda, nombre_destinatario, direccion_envio, cp, ciudad, telefono_contacto) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
         $id_usuario = $pedido->getId_usuario();
@@ -24,26 +28,27 @@ class PedidoDAO {
         $estado = $pedido->getEstado();
         $total = $pedido->getTotal();
         $moneda = $pedido->getMoneda();
-        
+
         $nombre = $pedido->getNombre_destinatario();
         $direccion = $pedido->getDireccion_envio();
         $cp = $pedido->getCp();
         $ciudad = $pedido->getCiudad();
         $tlf = $pedido->getTelefono_contacto();
-        
+
         $stmt->bind_param("iissdssssss", $id_usuario, $id_oferta, $fecha_pedido, $estado, $total, $moneda, $nombre, $direccion, $cp, $ciudad, $tlf);
 
         $stmt->execute();
         return $this->db->insert_id;
     }
 
-    public function getPedidosByUsuario($id_usuario) {
+    public function getPedidosByUsuario($id_usuario)
+    {
         $stmt = $this->db->prepare("SELECT * FROM pedido WHERE id_usuario = ? ORDER BY fecha_pedido DESC");
-        
+
         $stmt->bind_param("i", $id_usuario);
         $stmt->execute();
         $result = $stmt->get_result();
-        
+
         $pedidos = [];
         while ($row = $result->fetch_assoc()) {
             $pedido = new Pedido();
@@ -59,19 +64,20 @@ class PedidoDAO {
             $pedido->setCp($row['cp']);
             $pedido->setCiudad($row['ciudad']);
             $pedido->setTelefono_contacto($row['telefono_contacto']);
-            
+
             $pedidos[] = $pedido;
         }
         return $pedidos;
     }
 
-    public function getPedidoById($id) {
+    public function getPedidoById($id)
+    {
         $stmt = $this->db->prepare("SELECT * FROM pedido WHERE id_pedido = ?");
         $stmt->bind_param("i", $id);
         $stmt->execute();
         $result = $stmt->get_result();
         $row = $result->fetch_assoc();
-        
+
         if (!$row) return null;
 
         $pedido = new Pedido();
@@ -87,21 +93,23 @@ class PedidoDAO {
         $pedido->setCp($row['cp']);
         $pedido->setCiudad($row['ciudad']);
         $pedido->setTelefono_contacto($row['telefono_contacto']);
-        
+
         return $pedido;
     }
 
-    public function update($pedido) {
+    public function update($pedido)
+    {
         // solo actualizamos el estado
         $stmt = $this->db->prepare("UPDATE pedido SET estado = ? WHERE id_pedido = ?");
         $estado = $pedido->getEstado();
         $id = $pedido->getId_pedido();
-        
+
         $stmt->bind_param("si", $estado, $id);
         return $stmt->execute();
     }
 
-    public function delete($id) {
+    public function delete($id)
+    {
         $stmt = $this->db->prepare("DELETE FROM pedido WHERE id_pedido = ?");
         $stmt->bind_param("i", $id);
         return $stmt->execute();

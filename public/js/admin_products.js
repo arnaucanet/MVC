@@ -13,9 +13,9 @@ async function loadCategories() {
         const response = await fetch(API_CATEGORIA_URL);
         const categories = await response.json();
         const select = document.getElementById('product-categoriaId');
-        
+
         select.innerHTML = '<option value="">Selecciona una categoría</option>';
-        
+
         categories.forEach(cat => {
             const option = document.createElement('option');
             option.value = cat.id_categoria;
@@ -42,8 +42,8 @@ async function fetchProducts() {
 function renderProductTable(products) {
     const tbody = document.querySelector('#products-table tbody');
     tbody.innerHTML = '';
-    
-    if(products.length === 0){
+
+    if (products.length === 0) {
         tbody.innerHTML = '<tr><td colspan="9" style="text-align:center;">No hay productos</td></tr>';
         return;
     }
@@ -52,7 +52,7 @@ function renderProductTable(products) {
         const tr = document.createElement('tr');
         const activoClass = (product.activo == 1 || product.activo == '1') ? 'badge-success' : 'badge-danger';
         const activoLabel = (product.activo == 1 || product.activo == '1') ? 'Activo' : 'Inactivo';
-        
+
         tr.innerHTML = `
             <td>#${product.id_producto}</td>
             <td>
@@ -76,7 +76,7 @@ function renderProductTable(products) {
 
 function editProduct(id) {
     const product = currentProducts.find(p => p.id_producto == id);
-    if(product) openProductModal(product);
+    if (product) openProductModal(product);
 }
 
 function openProductModal(product = null) {
@@ -85,9 +85,9 @@ function openProductModal(product = null) {
     const form = document.getElementById('product-form');
 
     modal.classList.add('open');
-    
+
     if (product) {
-        if(title) title.textContent = 'Editar Producto';
+        if (title) title.textContent = 'Editar Producto';
         document.getElementById('product-id').value = product.id_producto;
         document.getElementById('product-nombre').value = product.nombre;
         document.getElementById('product-descripcion').value = product.descripcion;
@@ -97,7 +97,7 @@ function openProductModal(product = null) {
         document.getElementById('product-activo').value = product.activo;
         document.getElementById('product-categoriaId').value = product.id_categoria;
     } else {
-        if(title) title.textContent = 'Nuevo Producto';
+        if (title) title.textContent = 'Nuevo Producto';
         form.reset();
         document.getElementById('product-id').value = '';
         document.getElementById('product-activo').value = 0;
@@ -110,7 +110,7 @@ function closeProductModal() {
 
 async function handleProductFormSubmit(p) {
     p.preventDefault();
-    
+
     const id = document.getElementById('product-id').value;
     const nombre = document.getElementById('product-nombre').value;
     const descripcion = document.getElementById('product-descripcion').value;
@@ -121,14 +121,14 @@ async function handleProductFormSubmit(p) {
     const id_categoria = document.getElementById('product-categoriaId').value;
 
     const data = { nombre, descripcion, precio, imagen, stock, activo, id_categoria };
-    
+
     let method = 'POST';
-    
+
     if (id) {
         method = 'PUT';
         data.id_producto = id;
     } else {
-        if(!imagen) {
+        if (!imagen) {
             alert('La imagen es obligatoria para nuevos productos');
             return;
         }

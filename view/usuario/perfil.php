@@ -27,7 +27,7 @@
                             <label for="nombre" class="form-label">Nombre completo</label>
                             <input type="text" class="form-control bg-dark text-white border-secondary" id="nombre" name="nombre" value="<?= htmlspecialchars($usuario->getNombre()) ?>" required>
                         </div>
-                        
+
                         <div class="mb-3">
                             <label for="email" class="form-label">Correo electrónico</label>
                             <input type="email" class="form-control bg-dark text-white border-secondary" id="email" name="email" value="<?= htmlspecialchars($usuario->getEmail()) ?>" required>
@@ -61,7 +61,7 @@
             </div>
 
             <div class="text-center mt-4 text-white small">
-                 Miembro desde: <?= date('d/m/Y', strtotime($usuario->getFecha_registro())) ?>
+                Miembro desde: <?= date('d/m/Y', strtotime($usuario->getFecha_registro())) ?>
             </div>
         </div>
     </div>

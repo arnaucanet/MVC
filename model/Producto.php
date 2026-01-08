@@ -1,6 +1,7 @@
 <?php
 
-class Producto {
+class Producto
+{
     private $id_producto;
     private $nombre;
     private $descripcion;
@@ -12,7 +13,7 @@ class Producto {
 
     /**
      * Get the value of id_producto
-     */ 
+     */
     public function getId_producto()
     {
         return $this->id_producto;
@@ -22,7 +23,7 @@ class Producto {
      * Set the value of id_producto
      *
      * @return  self
-     */ 
+     */
     public function setId_producto($id_producto)
     {
         $this->id_producto = $id_producto;
@@ -32,7 +33,7 @@ class Producto {
 
     /**
      * Get the value of nombre
-     */ 
+     */
     public function getNombre()
     {
         return $this->nombre;
@@ -42,7 +43,7 @@ class Producto {
      * Set the value of nombre
      *
      * @return  self
-     */ 
+     */
     public function setNombre($nombre)
     {
         $this->nombre = $nombre;
@@ -52,7 +53,7 @@ class Producto {
 
     /**
      * Get the value of descripcion
-     */ 
+     */
     public function getDescripcion()
     {
         return $this->descripcion;
@@ -62,7 +63,7 @@ class Producto {
      * Set the value of descripcion
      *
      * @return  self
-     */ 
+     */
     public function setDescripcion($descripcion)
     {
         $this->descripcion = $descripcion;
@@ -72,7 +73,7 @@ class Producto {
 
     /**
      * Get the value of precio
-     */ 
+     */
     public function getPrecio()
     {
         return $this->precio;
@@ -82,7 +83,7 @@ class Producto {
      * Set the value of precio
      *
      * @return  self
-     */ 
+     */
     public function setPrecio($precio)
     {
         $this->precio = $precio;
@@ -92,7 +93,7 @@ class Producto {
 
     /**
      * Get the value of imagen
-     */ 
+     */
     public function getImagen()
     {
         return $this->imagen;
@@ -102,7 +103,7 @@ class Producto {
      * Set the value of imagen
      *
      * @return  self
-     */ 
+     */
     public function setImagen($imagen)
     {
         $this->imagen = $imagen;
@@ -112,7 +113,7 @@ class Producto {
 
     /**
      * Get the value of stock
-     */ 
+     */
     public function getStock()
     {
         return $this->stock;
@@ -122,7 +123,7 @@ class Producto {
      * Set the value of stock
      *
      * @return  self
-     */ 
+     */
     public function setStock($stock)
     {
         $this->stock = $stock;
@@ -132,7 +133,7 @@ class Producto {
 
     /**
      * Get the value of activo
-     */ 
+     */
     public function getActivo()
     {
         return $this->activo;
@@ -142,7 +143,7 @@ class Producto {
      * Set the value of activo
      *
      * @return  self
-     */ 
+     */
     public function setActivo($activo)
     {
         $this->activo = $activo;
@@ -152,7 +153,7 @@ class Producto {
 
     /**
      * Get the value of id_categoria
-     */ 
+     */
     public function getId_categoria()
     {
         return $this->id_categoria;
@@ -162,7 +163,7 @@ class Producto {
      * Set the value of id_categoria
      *
      * @return  self
-     */ 
+     */
     public function setId_categoria($id_categoria)
     {
         $this->id_categoria = $id_categoria;

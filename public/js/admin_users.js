@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     fetchUsers();
 
     const userForm = document.getElementById('user-form');
-    if(userForm) {
+    if (userForm) {
         userForm.addEventListener('submit', handleFormSubmit);
     }
 });
@@ -13,8 +13,10 @@ document.addEventListener('DOMContentLoaded', () => {
 function fetchUsers() {
     fetch(API_USER_URL)
         .then(response => response.json())
-        .then(users => {currentUsers = users; 
-            renderTable(users);})
+        .then(users => {
+            currentUsers = users;
+            renderTable(users);
+        })
         .catch(error => {
             console.error('Error fetching users:', error);
             alert('Error al cargar usuarios');
@@ -24,8 +26,8 @@ function fetchUsers() {
 function renderTable(users) {
     const tbody = document.querySelector('#users-table tbody');
     tbody.innerHTML = '';
-    
-    if(!Array.isArray(users) || users.length === 0){
+
+    if (!Array.isArray(users) || users.length === 0) {
         tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;">No hay usuarios</td></tr>';
         return;
     }
@@ -35,7 +37,7 @@ function renderTable(users) {
         const role = user.rol;
         const roleClass = role === 'administrador' ? 'badge-admin' : 'badge-client';
         const roleLabel = role.charAt(0).toUpperCase() + role.slice(1);
-        
+
         tr.innerHTML = `
             <td>#${user.id_usuario}</td>
             <td>
@@ -55,7 +57,7 @@ function renderTable(users) {
 
 function editUser(id) {
     const user = currentUsers.find(u => u.id_usuario == id);
-    if(user) openUserModal(user);
+    if (user) openUserModal(user);
 }
 
 function openUserModal(user = null) {
@@ -64,7 +66,7 @@ function openUserModal(user = null) {
     const form = document.getElementById('user-form');
 
     modal.classList.add('open');
-    
+
     if (user) {
         title.textContent = 'Editar Usuario';
         document.getElementById('user-id').value = user.id_usuario;
@@ -86,7 +88,7 @@ function closeUserModal() {
 
 async function handleFormSubmit(e) {
     e.preventDefault();
-    
+
     const id = document.getElementById('user-id').value;
     const nombre = document.getElementById('user-nombre').value;
     const email = document.getElementById('user-email').value;
@@ -95,14 +97,14 @@ async function handleFormSubmit(e) {
 
     const data = { nombre, email, rol };
     if (password) data.password = password;
-    
+
     let method = 'POST';
-    
+
     if (id) {
         method = 'PUT';
         data.id_usuario = id;
     } else {
-        if(!password) {
+        if (!password) {
             alert('La contraseña es obligatoria para nuevos usuarios');
             return;
         }

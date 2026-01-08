@@ -1,7 +1,7 @@
 <?php include 'view/parcials/header.php'; ?>
 <div class="container" style="padding-top:100px; padding-bottom: 50px; color: #fff;">
     <h1 class="mb-5">Preguntas Frecuentes</h1>
-    
+
     <div class="accordion accordion-flush" id="faqAccordion">
         <div class="accordion-item bg-dark text-white border-secondary">
             <h2 class="accordion-header" id="flush-headingOne">

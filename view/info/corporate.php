@@ -17,19 +17,19 @@
     <div class="row g-4 mt-4">
         <div class="col-md-4">
             <div class="text-center">
-                <h3 class="mb-3"  style="color: #e50914">Misión</h3>
+                <h3 class="mb-3" style="color: #e50914">Misión</h3>
                 <p class="text-white-50">Llevar los sabores de la pantalla a tu mesa, creando momentos inolvidables.</p>
             </div>
         </div>
         <div class="col-md-4">
             <div class="text-center">
-                <h3 class="mb-3"  style="color: #e50914">Visión</h3>
+                <h3 class="mb-3" style="color: #e50914">Visión</h3>
                 <p class="text-white-50">Ser la plataforma líder mundial en experiencias gastronómicas temáticas.</p>
             </div>
         </div>
         <div class="col-md-4">
             <div class="text-center">
-                <h3 class="mb-3"  style="color: #e50914">Valores</h3>
+                <h3 class="mb-3" style="color: #e50914">Valores</h3>
                 <p class="text-white-50">Innovación, Calidad, Pasión y Diversión.</p>
             </div>
         </div>

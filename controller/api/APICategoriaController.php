@@ -1,15 +1,17 @@
 <?php
 include_once 'model/DAO/CategoriaDAO.php';
 
-class APICategoriaController {
-    
-    public function index(){
+class APICategoriaController
+{
+
+    public function index()
+    {
         $method = $_SERVER['REQUEST_METHOD'];
         $dao = new CategoriaDAO();
 
         header('Content-Type: application/json');
 
-        if($method === 'GET'){
+        if ($method === 'GET') {
             $categorias = $dao->getCategorias();
             echo json_encode($categorias);
         } else {
